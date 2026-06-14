@@ -20,14 +20,14 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: Lint & format
-        run: pnpm check
-      - name: Typecheck
-        run: pnpm typecheck
-      - name: Test
-        run: pnpm test
+      # Build first: it generates the `content-collections` module + SEO/OG
+      # assets that the typecheck and tests depend on.
       - name: Build
         run: pnpm build
+      - name: Lint, format & typecheck
+        run: pnpm check
+      - name: Test
+        run: pnpm test
 
   commitlint:
     runs-on: ubuntu-latest
