@@ -1,0 +1,67 @@
+/* ===========================================================================
+ * Color & shape tokens — the single source of truth.
+ * Light palette = design.md "Paper White" (ink / cream / rust).
+ * Dark palette = derived "ink page" inversion (design.md is light-only).
+ *
+ * Raw tokens are intentionally NOT named `--color-*`; styles/app.css maps them
+ * into Tailwind's theme so utilities (bg-page, text-ink, text-rust …) resolve
+ * to these vars and flip automatically with the `.dark` class.
+ * Do NOT use Tailwind's default color palette anywhere — only these tokens.
+ * ======================================================================== */
+
+:root {
+	color-scheme: light;
+
+	/* Ink — text */
+	--ink: #1b1a17; /* primary: headlines, body */
+	--ink-soft: #5c5a54; /* secondary: captions, metadata */
+
+	/* Rust — the sole interaction accent. Reserve it. */
+	--rust: #9c3b1b;
+	--rust-hover: #7e2f15;
+	--on-accent: #faf5e8; /* text/icon on a rust surface */
+
+	/* Paper — surfaces */
+	--page: #f5efe1; /* neutral page foundation */
+	--surface: #faf5e8; /* cards, raised panels */
+	--surface-2: #efe7d4; /* nested / inset surfaces */
+	--muted: #ece3d0; /* chips, subtle fills */
+	--border: #ddd2bb; /* hairlines, dividers */
+
+	/* Comic stage — where strips are drawn */
+	--comic-stage: #ffffff;
+	--bubble: #ffffff;
+	--bubble-ink: #1b1a17;
+
+	/* Effects */
+	--ring: var(--rust);
+	--shadow-sm: 0 1px 2px rgba(27, 26, 23, 0.06);
+	--shadow-md: 0 8px 24px rgba(27, 26, 23, 0.08);
+	--shadow-lg: 0 18px 44px rgba(27, 26, 23, 0.12);
+}
+
+.dark {
+	color-scheme: dark;
+
+	--ink: #f5efe1;
+	--ink-soft: #a8a49a;
+
+	--rust: #d2693f; /* lifted for contrast on dark */
+	--rust-hover: #e2825c;
+	--on-accent: #16140f;
+
+	--page: #16140f;
+	--surface: #1f1d17;
+	--surface-2: #262219;
+	--muted: #211e17;
+	--border: #322e24;
+
+	--comic-stage: #211e17;
+	--bubble: #f5efe1;
+	--bubble-ink: #1b1a17;
+
+	--ring: var(--rust);
+	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+	--shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+	--shadow-lg: 0 18px 44px rgba(0, 0, 0, 0.55);
+}

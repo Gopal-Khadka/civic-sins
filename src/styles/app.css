@@ -1,0 +1,82 @@
+/* ===========================================================================
+ * App stylesheet entry. Imports Tailwind + centralized token files, then maps
+ * raw tokens into Tailwind's theme so all utilities resolve to our tokens and
+ * flip with the `.dark` class. This is the ONLY file routes import.
+ * ======================================================================== */
+
+@import "tailwindcss";
+@plugin '@tailwindcss/typography';
+
+@import "./tokens.css";
+@import "./typography.css";
+
+/* `.dark` class strategy (toggled on <html> by ThemeProvider). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Map raw tokens -> Tailwind theme. `inline` keeps the var reference so dark
+ * mode overrides in tokens.css take effect at runtime. */
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-rust: var(--rust);
+  --color-rust-hover: var(--rust-hover);
+  --color-on-accent: var(--on-accent);
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-comic-stage: var(--comic-stage);
+  --color-bubble: var(--bubble);
+  --color-bubble-ink: var(--bubble-ink);
+
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-display);
+}
+
+/* Static shape tokens (do not change between themes). */
+@theme {
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 14px;
+}
+
+@layer base {
+	* {
+		border-color: var(--border);
+	}
+
+	html {
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	body {
+		min-height: 100dvh;
+		background-color: var(--page);
+		color: var(--ink);
+		font-family: var(--font-body);
+		font-size: var(--text-body-size);
+		line-height: var(--text-body-leading);
+	}
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		font-family: var(--font-display);
+		font-weight: 500;
+		color: var(--ink);
+	}
+
+	::selection {
+		background-color: var(--rust);
+		color: var(--on-accent);
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: 2px;
+	}
+}
