@@ -1,0 +1,38 @@
+Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
+
+Copyright (c) 2026 Gopal Khadka
+
+The comic content in this repository — the strips, their scripts and dialogue,
+captions, and the Markdown/MDX files under `src/content/` — is licensed under the
+Creative Commons Attribution-NonCommercial 4.0 International License.
+
+You are free to:
+
+  - Share — copy and redistribute the material in any medium or format
+  - Adapt — remix, transform, and build upon the material
+
+Under the following terms:
+
+  - Attribution — You must give appropriate credit (to "Civic Sins" and a link
+    back to the project), provide a link to this license, and indicate if
+    changes were made.
+  - NonCommercial — You may not use the material for commercial purposes.
+
+No additional restrictions — You may not apply legal terms or technological
+measures that legally restrict others from doing anything the license permits.
+
+This is a human-readable summary of (and not a substitute for) the license.
+The full legal text is available at:
+
+  https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
+License summary: https://creativecommons.org/licenses/by-nc/4.0/
+
+---
+
+NOTE ON SCOPE: This license covers the comic CONTENT only. The repository's
+source code is licensed separately under the MIT License. See LICENSE.
+
+Comicgen character artwork is provided by Gramener's Comicgen
+(https://gramener.com/comicgen/) and is subject to its own terms; it is not
+covered by this license.

@@ -1,244 +1,165 @@
-Welcome to your new TanStack Start app! 
+# Civic Sins
 
-# Getting Started
+> We are all guilty. Especially me.
 
-To run this application:
+Satirical comics that teach civic sense by making you wince at **yourself** — not the
+stranger next to you. The narrator is always the worst offender. It is not political,
+not for profit, and targets behaviours, never people.
+
+Built on **TanStack Start** (React 19) with a config-driven, DRY architecture:
+content is data, design is tokens, and SEO/feeds/social cards are generated from the
+content at build time.
+
+---
+
+## Tech stack
+
+| Area        | Choice                                                              |
+| ----------- | ------------------------------------------------------------------ |
+| Framework   | TanStack Start + TanStack Router (file-based routes, SSR)           |
+| Build       | Vite, deployed on Netlify                                           |
+| Styling     | Tailwind CSS v4 with custom semantic tokens (light + dark)         |
+| Content     | `content-collections` + MDX (strip-as-data frontmatter)            |
+| Comic art   | [Comicgen](https://gramener.com/comicgen/) over our CSS bubbles    |
+| Icons       | lucide-react                                                        |
+| Analytics   | PostHog (cookieless, anonymous-only, opt-in via env)               |
+| Tooling     | Biome, Vitest, Lefthook, commitlint, release-please                |
+
+## Quick start
 
 ```bash
 pnpm install
-pnpm dev
+pnpm dev          # http://localhost:3000
 ```
 
-# Building For Production
+Node 22+ and pnpm are required (`.nvmrc` + `packageManager` are pinned).
 
-To build this application for production:
+## Scripts
 
-```bash
-pnpm build
+| Script                 | What it does                                                       |
+| ---------------------- | ----------------------------------------------------------------- |
+| `pnpm dev`             | Dev server (regenerates SEO/OG assets first)                     |
+| `pnpm build`           | Production build (regenerates SEO/OG assets first)               |
+| `pnpm preview`         | Preview the production build                                       |
+| `pnpm test`            | Run the Vitest suite (`test:watch`, `test:coverage` also exist)   |
+| `pnpm typecheck`       | `tsc --noEmit`                                                     |
+| `pnpm check`           | Biome lint + format check (`pnpm format` to autofix)             |
+| `pnpm assets:generate` | Regenerate sitemap, RSS, robots, llms.txt, and OG cards          |
+
+## Project structure
+
+```
+src/
+  config/      # single source of truth: site, comics (cast/tags), formats, seo, theme, env
+  content/     # the comics + prose pages as MDX (this is the content)
+  styles/      # design tokens — tokens.css (color), typography.css, app.css (Tailwind)
+  components/  # ui/ layout/ theme/ comic/ analytics/ mdx/ (reusable, token-driven)
+  lib/         # comicgen (renderer URL), content (typed accessors), seo (meta + JSON-LD)
+  routes/      # file-based routes
+scripts/       # generate-seo.ts (feeds/sitemap/llms), generate-og.ts (Satori social cards)
+assets/fonts/  # static TTFs used by the OG card generator
 ```
 
-## Testing
+---
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
+## Adding a comic
 
-```bash
-pnpm test
+A comic is a single MDX file in `src/content/comics/`. The **frontmatter is the strip**
+(panels → Comicgen art + our speech bubbles); the Markdown body below `---` is optional
+"Behind the strip" commentary. The filename becomes the URL (`my-new-sin.mdx` →
+`/comics/my-new-sin`).
+
+```mdx
+---
+id: unique-id-001          # any unique string
+title: It's Just One Wrapper
+format: the-ripple         # MUST be a format id in src/config/formats.ts
+summary: One-line gallery blurb.
+tags: [littering, self-implicating]   # MUST be tag ids in src/config/comics.ts
+sharePrompt: Tag the person who...
+featured: true             # shows on the homepage
+date: '2026-06-14'         # controls sort order (newest first)
+panels:
+  - character: ethan       # MUST be a key in CHARACTERS (src/config/comics.ts)
+    emotion: smirk         # valid Comicgen emotion
+    pose: normal           # valid Comicgen pose
+    dialogue: It's just one wrapper.   # rendered in a speech bubble
+  - character: ethan
+    emotion: shocked
+    pose: normal
+    narration: That evening            # the between-panel beat
+    caption: The flooded street is his own.   # caption under the art
+---
+
+Optional commentary about the strip, rendered below it on the detail page.
 ```
 
-## Styling
+The schema in `content-collections.ts` validates every file on `pnpm dev`/`build` — an
+invalid `format`, `tag`, or `character`, or missing `panels`, fails the build with a clear
+error. Valid Comicgen `emotion`/`pose` values come from the `comicgen` package.
 
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
+To add new **formats**, **characters**, or **tags**, edit the config first
+(`src/config/formats.ts` and `src/config/comics.ts`), then reference them in frontmatter.
+Prose pages (Formats / Principles) live in `src/content/pages/`.
 
-### Removing Tailwind CSS
+---
 
-If you prefer not to use Tailwind CSS:
+## Theming
 
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Uninstall the packages: `pnpm add @tailwindcss/vite tailwindcss --dev`
+All color and type live as CSS custom properties in `src/styles/`:
 
-## Linting & Formatting
+- `tokens.css` — semantic color tokens; `:root` is the light "Paper White" palette,
+  `.dark` is the derived dark palette.
+- `typography.css` — fonts + type scale.
+- `app.css` — maps the raw tokens into Tailwind v4 (`@theme inline`) so utilities like
+  `bg-page text-ink text-rust font-serif` resolve to tokens and flip with `.dark`.
 
-This project uses [Biome](https://biomejs.dev/) for linting and formatting. The following scripts are available:
+Theme is no-FOUC (an inline script applies the class before paint) and toggles
+light → dark → system.
 
+## Analytics
 
-```bash
-pnpm lint
-pnpm format
-pnpm check
-```
+Cookieless and off by default. Set `VITE_POSTHOG_KEY` to enable anonymous-only,
+memory-persisted pageview tracking — no cookies, no PII, no consent banner. See
+`src/lib/analytics.ts` and `.env.example`.
 
+## SEO & GEO
 
-## Deploy to Netlify
+- Per-route `<head>` (titles, descriptions, canonical, Open Graph, Twitter cards, and
+  JSON-LD: WebSite / Organization / Article / BreadcrumbList / CollectionPage) via
+  `src/lib/seo.ts`.
+- `scripts/generate-seo.ts` emits `sitemap.xml`, `rss.xml`, `robots.txt`, and `llms.txt`
+  from the MDX content.
+- `scripts/generate-og.ts` renders 1200×630 social cards (`public/og/<slug>.png`) with
+  Satori — one per comic plus a default.
+- These assets are generated (gitignored) and rebuilt on every dev/build.
 
-This project ships with `netlify.toml` configured for a Netlify site:
+Set **`VITE_SITE_URL`** to your real origin (e.g. `https://yourdomain`) so canonical
+URLs, OG tags, sitemap, and feeds are correct. Defaults to a placeholder otherwise.
 
-1. Push this repo to GitHub
-2. Visit https://app.netlify.com/start and import the repo
-3. Netlify auto-detects the build (`vite build` → `dist/client`)
-4. Open **Site settings → Environment variables** and add anything from `.env.example` that needs a real value in production
-5. Trigger the first deploy
+## Conventions
 
-Server functions and API routes run on Netlify Functions. For lower-latency request handling, see Netlify Edge Functions: https://docs.netlify.com/edge-functions/overview.
+- **Commits**: Conventional Commits, enforced by commitlint (scopes: `comics`, `content`,
+  `ui`, `theme`, `config`, `analytics`, `ci`, `deps`, `release`, `test`).
+- **Hooks** (Lefthook): pre-commit runs Biome + typecheck on staged files; commit-msg
+  runs commitlint. Installed via `pnpm install`.
+- **CI** (GitHub Actions): lint, typecheck, test, build on every PR + commitlint on PRs.
+- **Releases**: release-please opens a release PR with the version bump + `CHANGELOG.md`
+  on merge to `master`.
 
+## Deployment
 
-## T3Env
+Deploys to Netlify (`@netlify/vite-plugin-tanstack-start`). Set environment variables in
+the Netlify dashboard:
 
-- You can use T3Env to add type safety to your environment variables.
-- Add Environment variables to the `src/env.mjs` file.
-- Use the environment variables in your code.
+- `VITE_SITE_URL` — your public origin (required for correct SEO)
+- `VITE_POSTHOG_KEY`, `VITE_POSTHOG_HOST` — optional analytics
 
-### Usage
+## License
 
-```ts
-import { env } from "#/env";
+Dual-licensed:
 
-console.log(env.VITE_APP_TITLE);
-```
+- **Code** — [MIT](./LICENSE)
+- **Comic content** (`src/content/`) — [CC BY-NC 4.0](./LICENSE-content)
 
-
-
-
-
-## Shadcn
-
-Add components using the latest version of [Shadcn](https://ui.shadcn.com/).
-
-```bash
-pnpm dlx shadcn@latest add button
-```
-
-
-
-## Routing
-
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-})
-```
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import { createServerFn } from '@tanstack/react-start'
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-  
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-  
-  return <div>Server time: {time}</div>
-}
-```
-
-## API Routes
-
-You can create API routes by using the `server` property in your route definitions:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-})
-```
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
-  },
-  component: PeopleComponent,
-})
-
-function PeopleComponent() {
-  const data = Route.useLoaderData()
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  )
-}
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
-
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
+Comicgen character artwork is © Gramener and subject to its own terms.
