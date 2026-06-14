@@ -36,12 +36,16 @@ export interface PanelLike {
 }
 
 /** Resolve an author-facing panel (config character id) into a renderable URL. */
-export function panelImageUrl(panel: PanelLike): string {
+export function panelImageUrl(
+	panel: PanelLike,
+	ext: "svg" | "png" = "svg",
+): string {
 	const char = getCharacter(panel.character);
 	return comicgenUrl({
 		name: char.name,
 		angle: panel.angle ?? char.angle,
 		emotion: panel.emotion,
 		pose: panel.pose,
+		ext,
 	});
 }

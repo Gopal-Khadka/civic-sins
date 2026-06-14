@@ -3,12 +3,17 @@ import { PageWrap } from "#/components/layout/PageWrap";
 import { MDXContent } from "#/components/mdx/MDXContent";
 import { Card } from "#/components/ui/Card";
 import { FORMATS } from "#/config/comics";
-import { siteConfig } from "#/config/site";
 import { getPage } from "#/lib/content";
+import { seo } from "#/lib/seo";
 
 export const Route = createFileRoute("/formats")({
 	loader: () => ({ page: getPage("formats") }),
-	head: () => ({ meta: [{ title: `Formats — ${siteConfig.name}` }] }),
+	head: ({ loaderData }) =>
+		seo({
+			title: loaderData?.page?.title ?? "Formats",
+			description: loaderData?.page?.description,
+			path: "/formats",
+		}),
 	component: FormatsPage,
 });
 

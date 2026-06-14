@@ -14,5 +14,11 @@ todos.json
 .content-collections
 coverage
 
+# Generated SEO/GEO assets (rebuilt by scripts/generate-seo.ts on dev/build)
+/public/sitemap.xml
+/public/rss.xml
+/public/robots.txt
+/public/llms.txt
+
 # Local Netlify folder
 .netlify

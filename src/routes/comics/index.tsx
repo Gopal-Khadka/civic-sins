@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ComicCard } from "#/components/comic/ComicCard";
 import { PageWrap } from "#/components/layout/PageWrap";
 import { FORMATS, TAGS } from "#/config/comics";
-import { filterComics } from "#/lib/content";
+import { filterComics, getComics } from "#/lib/content";
+import { collectionPageJsonLd, jsonLdScript, seo } from "#/lib/seo";
 import { cn } from "#/lib/utils";
 
 interface ComicsSearch {
@@ -10,10 +11,33 @@ interface ComicsSearch {
 	tag?: string;
 }
 
+const GALLERY_TITLE = "Every sin, on the record";
+const GALLERY_DESC = "Find yourself in one. Then send it to someone else.";
+
 export const Route = createFileRoute("/comics/")({
 	validateSearch: (search: Record<string, unknown>): ComicsSearch => ({
 		format: typeof search.format === "string" ? search.format : undefined,
 		tag: typeof search.tag === "string" ? search.tag : undefined,
+	}),
+	head: () => ({
+		...seo({
+			title: GALLERY_TITLE,
+			description: GALLERY_DESC,
+			path: "/comics",
+		}),
+		scripts: [
+			jsonLdScript(
+				collectionPageJsonLd({
+					name: GALLERY_TITLE,
+					description: GALLERY_DESC,
+					path: "/comics",
+					items: getComics().map((c) => ({
+						title: c.title,
+						path: `/comics/${c.slug}`,
+					})),
+				}),
+			),
+		],
 	}),
 	component: ComicsPage,
 });
@@ -50,8 +74,8 @@ function ComicsPage() {
 	return (
 		<PageWrap
 			kicker="The gallery"
-			title="Every sin, on the record"
-			description="Find yourself in one. Then send it to someone else."
+			title={GALLERY_TITLE}
+			description={GALLERY_DESC}
 		>
 			{/* Format filters */}
 			<div className="mb-3 flex flex-wrap gap-2">

@@ -8,11 +8,14 @@ import {
 	Send,
 	Sparkles,
 } from "lucide-react";
+import { DEFAULT_SITE_URL, seoConfig, socialLinks } from "#/config/seo";
 
 /**
  * Site-wide configuration. Single source of truth for branding, navigation,
- * footer and social links. Nothing here should be hardcoded in components —
- * Header / Footer / <head> meta all read from this object.
+ * footer and social links. Brand text + social URLs come from the framework-free
+ * `seo.ts` (shared with the SEO generator); this file adds the React/icon layer.
+ * Nothing here should be hardcoded in components — Header / Footer / <head> all
+ * read from this object.
  */
 
 export interface NavItem {
@@ -27,13 +30,18 @@ export interface SocialLink {
 	icon: LucideIcon;
 }
 
+/** Lucide icon per social profile, keyed by the label used in `seo.ts`. */
+const socialIcons: Record<string, LucideIcon> = {
+	Instagram,
+	GitHub: Github,
+};
+
 export const siteConfig = {
-	name: "Civic Sins",
-	shortName: "Civic Sins",
-	tagline: "We are all guilty. Especially me.",
-	description:
-		"Satirical comics that teach civic sense by making you wince at yourself — not the stranger next to you.",
-	url: "https://civicsins.example",
+	name: seoConfig.name,
+	shortName: seoConfig.shortName,
+	tagline: seoConfig.tagline,
+	description: seoConfig.description,
+	url: DEFAULT_SITE_URL,
 	brandIcon: Sparkles as LucideIcon,
 
 	nav: [
@@ -44,10 +52,10 @@ export const siteConfig = {
 
 	cta: { label: "Read the comics", to: "/comics", icon: Send },
 
-	social: [
-		{ label: "Instagram", href: "https://instagram.com", icon: Instagram },
-		{ label: "GitHub", href: "https://github.com", icon: Github },
-	] satisfies SocialLink[],
+	social: socialLinks.map((s) => ({
+		...s,
+		icon: socialIcons[s.label] ?? Sparkles,
+	})) satisfies SocialLink[],
 
 	footer: {
 		note: "A social-responsibility hobby project. Not political. Not for profit. Targets behaviours, never people.",

@@ -3,8 +3,14 @@ import { ArrowLeft } from "lucide-react";
 import { ComicStrip } from "#/components/comic/ComicStrip";
 import { MDXContent } from "#/components/mdx/MDXContent";
 import { Container } from "#/components/ui/Container";
-import { siteConfig } from "#/config/site";
 import { getComic } from "#/lib/content";
+import {
+	articleJsonLd,
+	breadcrumbJsonLd,
+	comicOgImage,
+	jsonLdScript,
+	seo,
+} from "#/lib/seo";
 
 export const Route = createFileRoute("/comics/$slug")({
 	loader: ({ params }) => {
@@ -12,17 +18,30 @@ export const Route = createFileRoute("/comics/$slug")({
 		if (!comic) throw notFound();
 		return { comic };
 	},
-	head: ({ loaderData }) => ({
-		meta: loaderData
-			? [
-					{ title: `${loaderData.comic.title} — ${siteConfig.name}` },
-					{
-						name: "description",
-						content: loaderData.comic.summary ?? siteConfig.description,
-					},
-				]
-			: [],
-	}),
+	head: ({ loaderData }) => {
+		if (!loaderData) return {};
+		const { comic } = loaderData;
+		return {
+			...seo({
+				title: comic.title,
+				description: comic.summary,
+				path: `/comics/${comic.slug}`,
+				image: comicOgImage(comic),
+				type: "article",
+				keywords: comic.tags,
+			}),
+			scripts: [
+				jsonLdScript(articleJsonLd(comic)),
+				jsonLdScript(
+					breadcrumbJsonLd([
+						{ name: "Home", path: "/" },
+						{ name: "Comics", path: "/comics" },
+						{ name: comic.title, path: `/comics/${comic.slug}` },
+					]),
+				),
+			],
+		};
+	},
 	component: ComicDetail,
 });
 

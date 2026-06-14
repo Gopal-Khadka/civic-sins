@@ -1,12 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageWrap } from "#/components/layout/PageWrap";
 import { MDXContent } from "#/components/mdx/MDXContent";
-import { siteConfig } from "#/config/site";
 import { getPage } from "#/lib/content";
+import { seo } from "#/lib/seo";
 
 export const Route = createFileRoute("/principles")({
 	loader: () => ({ page: getPage("principles") }),
-	head: () => ({ meta: [{ title: `Principles — ${siteConfig.name}` }] }),
+	head: ({ loaderData }) =>
+		seo({
+			title: loaderData?.page?.title ?? "Principles",
+			description: loaderData?.page?.description,
+			path: "/principles",
+		}),
 	component: PrinciplesPage,
 });
 

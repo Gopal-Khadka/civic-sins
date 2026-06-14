@@ -7,10 +7,15 @@ import { Container } from "#/components/ui/Container";
 import { FORMATS } from "#/config/comics";
 import { siteConfig } from "#/config/site";
 import { getFeaturedComics } from "#/lib/content";
+import { jsonLdScript, seo, websiteJsonLd } from "#/lib/seo";
 
 export const Route = createFileRoute("/")({
 	component: Home,
 	loader: () => ({ featured: getFeaturedComics(3) }),
+	head: () => ({
+		...seo({ path: "/", keywords: ["civic sense", "satire", "comics"] }),
+		scripts: [jsonLdScript(websiteJsonLd())],
+	}),
 });
 
 function Home() {

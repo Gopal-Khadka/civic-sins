@@ -8,6 +8,8 @@ import { z } from "zod";
 export const env = createEnv({
 	clientPrefix: "VITE_",
 	client: {
+		/** Public origin used for canonical URLs, OG tags, sitemap and feeds. */
+		VITE_SITE_URL: z.url().optional(),
 		VITE_POSTHOG_KEY: z.string().optional(),
 		VITE_POSTHOG_HOST: z.url().default("https://us.i.posthog.com"),
 	},
