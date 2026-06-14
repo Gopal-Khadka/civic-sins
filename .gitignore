@@ -12,6 +12,7 @@ dist-ssr
 __unconfig*
 todos.json
 .content-collections
+coverage
 
 # Local Netlify folder
 .netlify

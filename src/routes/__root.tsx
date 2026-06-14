@@ -1,6 +1,7 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { Analytics } from "#/components/analytics/Analytics";
 import { Footer } from "#/components/layout/Footer";
 import { Header } from "#/components/layout/Header";
 import { ThemeProvider } from "#/components/theme/ThemeProvider";
@@ -28,6 +29,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			</head>
 			<body>
 				<ThemeProvider>
+					<Analytics />
 					<div className="flex min-h-dvh flex-col">
 						<Header />
 						<main className="flex-1">{children}</main>
