@@ -4,73 +4,39 @@ import {
 	HeartHandshake,
 	Megaphone,
 	Scale,
+	Sparkles,
 	Waves,
 	Zap,
 } from "lucide-react";
+import { FORMATS_META, type FormatMeta } from "#/config/formats";
 
 /**
- * Comic catalog config — the single source of truth for the recurring formats,
- * the character cast (mapped to Comicgen), and the tag vocabulary.
+ * Comic catalog config — the single source of truth for the character cast
+ * (mapped to Comicgen) and the tag vocabulary. Format metadata lives in the
+ * framework-free `formats.ts`; here we attach the Lucide icons.
  * Schemas, gallery filters and the Formats page all derive from this.
  */
 
 /* ------------------------------------------------------------------ formats */
 
-export interface ComicFormat {
-	id: string;
-	name: string;
-	mechanic: string;
-	sting: string;
+export interface ComicFormat extends FormatMeta {
 	icon: LucideIcon;
 }
 
-export const FORMATS: ComicFormat[] = [
-	{
-		id: "the-ripple",
-		name: "The Ripple",
-		mechanic:
-			"One small inconsiderate act cascades into ruining ten people’s day.",
-		sting: "Makes the invisible cost of “just one wrapper” visible.",
-		icon: Waves,
-	},
-	{
-		id: "civic-sense-court",
-		name: "Civic Sense Court",
-		mechanic: "An offender on trial gives an absurdly self-righteous defense.",
-		sting: "Reusable cast; comedy rides the emotion swings.",
-		icon: Gavel,
-	},
-	{
-		id: "expectation-vs-reality",
-		name: "Expectation vs Reality",
-		mechanic:
-			"What the offender thinks they look like vs what they actually look like.",
-		sting: "Brutal, instant, infinitely repeatable.",
-		icon: Scale,
-	},
-	{
-		id: "the-smug-narrator",
-		name: "The Smug Narrator",
-		mechanic:
-			"A character lectures everyone and is secretly the worst offender present.",
-		sting: "Dramatic irony — the reader sees what the character can’t.",
-		icon: Megaphone,
-	},
-	{
-		id: "todays-confession",
-		name: "Today's Confession",
-		mechanic: "The mascot owns one of their own civic sins.",
-		sting: "Builds trust; models the self-aware-hypocrite tone.",
-		icon: HeartHandshake,
-	},
-	{
-		id: "cosmic-karma",
-		name: "Cosmic Karma",
-		mechanic: "The serial offender faces escalating, exaggerated comeuppance.",
-		sting: "Memorable through absurd escalation.",
-		icon: Zap,
-	},
-];
+/** Lucide icon per format, keyed by id. */
+const FORMAT_ICONS: Record<string, LucideIcon> = {
+	"the-ripple": Waves,
+	"civic-sense-court": Gavel,
+	"expectation-vs-reality": Scale,
+	"the-smug-narrator": Megaphone,
+	"todays-confession": HeartHandshake,
+	"cosmic-karma": Zap,
+};
+
+export const FORMATS: ComicFormat[] = FORMATS_META.map((f) => ({
+	...f,
+	icon: FORMAT_ICONS[f.id] ?? Sparkles,
+}));
 
 export const FORMAT_IDS = FORMATS.map((f) => f.id);
 export const getFormat = (id: string) => FORMATS.find((f) => f.id === id);

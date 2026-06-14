@@ -4,6 +4,7 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { Analytics } from "#/components/analytics/Analytics";
 import { Footer } from "#/components/layout/Footer";
 import { Header } from "#/components/layout/Header";
+import { StatusScreen } from "#/components/layout/StatusScreen";
 import { ThemeProvider } from "#/components/theme/ThemeProvider";
 import { seoConfig } from "#/config/seo";
 import {
@@ -30,10 +31,22 @@ export const Route = createRootRoute({
 			...(seoConfig.twitterHandle
 				? [{ name: "twitter:site", content: seoConfig.twitterHandle }]
 				: []),
+			// Browser chrome color, per scheme (matches the Paper White tokens).
+			{
+				name: "theme-color",
+				content: "#f5efe1",
+				media: "(prefers-color-scheme: light)",
+			},
+			{
+				name: "theme-color",
+				content: "#16140f",
+				media: "(prefers-color-scheme: dark)",
+			},
 		],
 		// Canonical is owned per-route (leaf seo()); the root only sets defaults.
 		links: [
 			{ rel: "stylesheet", href: appCss },
+			{ rel: "apple-touch-icon", href: "/logo192.png" },
 			{
 				rel: "alternate",
 				type: "application/rss+xml",
@@ -46,6 +59,20 @@ export const Route = createRootRoute({
 			jsonLdScript(organizationJsonLd()),
 		],
 	}),
+	notFoundComponent: () => (
+		<StatusScreen
+			code="404"
+			title="This page has no civic sense"
+			description="It wandered off and left the page blocked. Typical. Let's head back."
+		/>
+	),
+	errorComponent: () => (
+		<StatusScreen
+			code="500"
+			title="We sinned, technically"
+			description="Something broke on our end. We're owning it — try again in a moment."
+		/>
+	),
 	shellComponent: RootDocument,
 });
 

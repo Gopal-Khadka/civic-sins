@@ -1,6 +1,5 @@
 import { env } from "#/config/env";
 import { DEFAULT_SITE_URL, seoConfig } from "#/config/seo";
-import { panelImageUrl } from "#/lib/comicgen";
 import type { Comic } from "#/lib/content";
 
 /**
@@ -51,7 +50,7 @@ export function seo({
 	title,
 	description = seoConfig.description,
 	path = "/",
-	image = seoConfig.defaultOgImage,
+	image = absoluteUrl(seoConfig.defaultOgImage),
 	type = "website",
 	keywords,
 }: SeoOptions = {}): { meta: MetaTag[]; links: LinkTag[] } {
@@ -89,10 +88,9 @@ export function jsonLdScript(data: Record<string, unknown>) {
 	return { type: "application/ld+json", children: JSON.stringify(data) };
 }
 
-/** OG image for a comic: its first panel rendered as PNG (falls back to default). */
+/** OG image for a comic: its generated social card (absolute URL). */
 export function comicOgImage(comic: Comic): string {
-	const first = comic.panels[0];
-	return first ? panelImageUrl(first, "png") : seoConfig.defaultOgImage;
+	return absoluteUrl(`/og/${comic.slug}.png`);
 }
 
 /* ----------------------------------------------------------- JSON-LD builders */

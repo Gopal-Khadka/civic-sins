@@ -73,10 +73,8 @@ describe("structured data", () => {
 		expect(ld.mainEntityOfPage).toBe(`${siteUrl}/comics/${comic.slug}`);
 	});
 
-	it("uses the first panel PNG as the comic OG image", () => {
-		const img = comicOgImage(comic);
-		expect(img).toContain("ext=png");
-		expect(img).toContain("name=ethan");
+	it("points the comic OG image at its generated card", () => {
+		expect(comicOgImage(comic)).toBe(`${siteUrl}/og/${comic.slug}.png`);
 	});
 
 	it("numbers breadcrumb positions from 1", () => {
