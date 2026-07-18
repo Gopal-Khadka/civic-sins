@@ -29,7 +29,7 @@ export function ComicLede({ comic }: { comic: Comic }) {
 							alt=""
 							loading="eager"
 							fetchPriority={i === 0 ? "high" : "auto"}
-							className="h-28 w-auto sm:h-32"
+							className="h-28 w-auto max-w-full object-contain sm:h-32"
 							draggable={false}
 						/>
 					</div>
