@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/Gopal-Khadka/civic-sins/compare/v1.1.0...v1.2.0) (2026-07-18)
+
+
+### Features
+
+* Add more comic strips and content ([2eb1d51](https://github.com/Gopal-Khadka/civic-sins/commit/2eb1d51d7169309e4ac01b382ee080b5f7594adc))
+* revamp the whole Ui for better UX ([5dc5b5d](https://github.com/Gopal-Khadka/civic-sins/commit/5dc5b5d1adba839ba28bd8d546157aa83862822b))
+
+
+### Bug Fixes
+
+* Update the design for hero cta btns ([4d74c05](https://github.com/Gopal-Khadka/civic-sins/commit/4d74c05bb89bf091a4322be6f35d7c8e8a11e7e2))
+
 ## [1.1.0](https://github.com/Gopal-Khadka/civic-sins/compare/v1.0.0...v1.1.0) (2026-07-18)
 
 
