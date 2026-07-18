@@ -1,5 +1,8 @@
 [build]
-  command = "vite build"
+  # Generate SEO assets (OG cards, sitemap, rss, llms.txt) BEFORE building.
+  # These live under public/ but are gitignored, so CI must regenerate them —
+  # `vite build` alone skips the prebuild hook and ships without them (OG 404s).
+  command = "pnpm run assets:generate && vite build"
   publish = "dist/client"
 [dev]
   command = "npm run dev"
