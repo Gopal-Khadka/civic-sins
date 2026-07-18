@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ComicCard } from "#/components/comic/ComicCard";
 import { ComicLede } from "#/components/comic/ComicLede";
 import { PageWrap } from "#/components/layout/PageWrap";
+import { Reveal } from "#/components/motion/Reveal";
+import { PaperTray } from "#/components/ui/PaperTray";
 import { FORMATS, getFormat, TAGS } from "#/config/comics";
 import { filterComics, getComics } from "#/lib/content";
 import { collectionPageJsonLd, jsonLdScript, seo } from "#/lib/seo";
@@ -58,7 +60,7 @@ function FilterChip({
 			to="/comics"
 			search={search}
 			className={cn(
-				"stamp border-2 border-foreground px-3 py-1.5 transition-colors",
+				"stamp border-2 border-foreground px-3 py-1.5 transition-colors active:translate-y-px",
 				active
 					? "bg-primary text-primary-foreground"
 					: "text-foreground hover:bg-foreground hover:text-background",
@@ -72,6 +74,9 @@ function FilterChip({
 function ComicsPage() {
 	const { format, tag } = Route.useSearch();
 	const comics = filterComics({ format, tag });
+	const [lead, ...others] = comics;
+	const medium = others.slice(0, 2);
+	const archive = others.slice(2);
 
 	return (
 		<PageWrap
@@ -117,13 +122,46 @@ function ComicsPage() {
 					No public offences found. Suspiciously well-behaved.
 				</p>
 			) : (
-				<div className="flex flex-col gap-5">
-					{/* Lead strip runs large; the rest fill an even grid below. */}
-					<ComicLede comic={comics[0]} />
-					{comics.length > 1 && (
-						<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-							{comics.slice(1).map((comic) => (
-								<ComicCard key={comic.slug} comic={comic} />
+				/* A wall of posted strips — lead runs large, then medium, then a
+				   compact archive row. Slight rotations on desktop only. */
+				<div className="flex flex-col gap-10">
+					{lead && (
+						<Reveal>
+							<PaperTray className="transition-transform duration-500 ease-[var(--ease-settle)] motion-reduce:rotate-0 lg:-rotate-1 lg:hover:rotate-0">
+								<ComicLede comic={lead} />
+							</PaperTray>
+						</Reveal>
+					)}
+
+					{medium.length > 0 && (
+						<div className="grid gap-6 sm:grid-cols-2">
+							{medium.map((comic, i) => (
+								<Reveal key={comic.slug} delay={i * 80}>
+									<ComicCard
+										comic={comic}
+										className={cn(
+											"h-full motion-reduce:rotate-0",
+											i % 2 === 0 ? "lg:-rotate-1" : "lg:rotate-1",
+										)}
+									/>
+								</Reveal>
+							))}
+						</div>
+					)}
+
+					{archive.length > 0 && (
+						<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+							{archive.map((comic, i) => (
+								<Reveal key={comic.slug} delay={i * 70}>
+									<ComicCard
+										comic={comic}
+										variant="compact"
+										className={cn(
+											"h-full motion-reduce:rotate-0",
+											i % 2 === 0 ? "lg:rotate-1" : "lg:-rotate-1",
+										)}
+									/>
+								</Reveal>
 							))}
 						</div>
 					)}

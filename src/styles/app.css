@@ -9,6 +9,7 @@
 
 @import "./tokens.css";
 @import "./typography.css";
+@import "./motion.css";
 
 /* `.dark` class strategy (toggled on <html> by ThemeProvider). */
 @custom-variant dark (&:where(.dark, .dark *));

@@ -1,6 +1,7 @@
 import type { Comic } from "#/lib/content";
 import { cn } from "#/lib/utils";
 import { ComicCharacter } from "./ComicCharacter";
+import { SceneBackplate } from "./SceneBackplate";
 import { SpeechBubble } from "./SpeechBubble";
 
 type Panel = Comic["panels"][number];
@@ -21,7 +22,7 @@ export function ComicPanel({ panel }: { panel: Panel }) {
 	const sceneBg = (panel.scene && SCENE_BG[panel.scene]) || "bg-card";
 
 	return (
-		<figure className="flex flex-col overflow-hidden border-[3px] border-foreground bg-card">
+		<figure className="flex h-full flex-col overflow-hidden border-[3px] border-foreground bg-card">
 			{panel.narration && (
 				<div className="stamp bg-foreground px-3 py-1.5 text-[0.7rem] text-background">
 					{panel.narration}
@@ -34,8 +35,11 @@ export function ComicPanel({ panel }: { panel: Panel }) {
 					sceneBg,
 				)}
 			>
-				{panel.dialogue && <SpeechBubble>{panel.dialogue}</SpeechBubble>}
-				<ComicCharacter panel={panel} />
+				<SceneBackplate scene={panel.scene} />
+				<div className="relative z-10 flex flex-col items-center gap-4">
+					{panel.dialogue && <SpeechBubble>{panel.dialogue}</SpeechBubble>}
+					<ComicCharacter panel={panel} />
+				</div>
 			</div>
 
 			{panel.caption && (

@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { getFormat } from "#/config/comics";
 import { panelImageUrl } from "#/lib/comicgen";
 import type { Comic } from "#/lib/content";
+import { SceneBackplate } from "./SceneBackplate";
 
 /**
  * The lead strip — a clipped mini-strip that reads as a real strip. Used as the
@@ -22,14 +23,15 @@ export function ComicLede({ comic }: { comic: Comic }) {
 				{panels.map((panel, i) => (
 					<div
 						key={`${panel.character}-${panel.emotion}-${panel.pose}-${panel.dialogue ?? panel.caption ?? ""}`}
-						className="flex items-end justify-center px-2 pt-4"
+						className="relative flex items-end justify-center overflow-hidden px-2 pt-4"
 					>
+						<SceneBackplate scene={panel.scene} />
 						<img
 							src={panelImageUrl(panel)}
 							alt=""
 							loading="eager"
 							fetchPriority={i === 0 ? "high" : "auto"}
-							className="h-28 w-auto max-w-full object-contain sm:h-32"
+							className="relative z-10 h-28 w-auto max-w-full object-contain sm:h-32"
 							draggable={false}
 						/>
 					</div>
