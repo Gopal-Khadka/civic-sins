@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
-    "@content-collections/core": "^0.15.1",
+    "@content-collections/core": "^0.15.2",
     "@content-collections/mdx": "^0.2.2",
     "@content-collections/vite": "^0.3.0",
     "@fontsource-variable/public-sans": "^5.2.7",
