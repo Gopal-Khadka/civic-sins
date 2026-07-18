@@ -35,8 +35,8 @@ export function ThemeToggle({ className }: { className?: string }) {
 			title={`Theme: ${LABELS[theme]}`}
 			className={cn(
 				"inline-flex size-9 items-center justify-center rounded-md border border-border",
-				"bg-surface text-ink-soft transition-colors hover:text-rust hover:border-rust/40",
-				"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust",
+				"bg-card text-muted-foreground transition-colors hover:text-primary hover:border-primary/40",
+				"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
 				className,
 			)}
 		>

@@ -28,7 +28,7 @@ function PrinciplesPage() {
 			{page?.body ? (
 				<MDXContent code={page.body} />
 			) : (
-				<p className="text-ink-soft">Coming soon.</p>
+				<p className="text-muted-foreground">Coming soon.</p>
 			)}
 		</PageWrap>
 	);

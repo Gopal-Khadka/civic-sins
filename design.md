@@ -1,32 +1,32 @@
 ---
 version: alpha
-name: Paper White
-description: The e-reader palette: ink, cream, nothing else.
+name: Heritage
+description: Architectural minimalism meets journalistic gravitas.
 colors:
-  primary: "#1B1A17"
-  secondary: "#5C5A54"
-  tertiary: "#9C3B1B"
-  neutral: "#F5EFE1"
-  surface: "#FAF5E8"
-  on-primary: "#FAF5E8"
+  primary: "#1A1C1E"
+  secondary: "#6C7278"
+  tertiary: "#B8422E"
+  neutral: "#F7F5F2"
+  surface: "#FFFFFF"
+  on-primary: "#FFFFFF"
 typography:
   display:
-    fontFamily: Source Serif 4
-    fontSize: 4.5rem
+    fontFamily: Fraunces
+    fontSize: 4rem
     fontWeight: 500
-    letterSpacing: "-0.01em"
+    letterSpacing: "-0.02em"
   h1:
-    fontFamily: Source Serif 4
+    fontFamily: Fraunces
     fontSize: 2.5rem
     fontWeight: 500
   body:
-    fontFamily: Source Serif 4
-    fontSize: 1.1rem
-    lineHeight: 1.75
+    fontFamily: Public Sans
+    fontSize: 1rem
+    lineHeight: 1.6
   label:
-    fontFamily: Source Sans 3
+    fontFamily: Space Grotesk
     fontSize: 0.75rem
-    letterSpacing: "0.1em"
+    letterSpacing: "0.08em"
 rounded:
   sm: 2px
   md: 4px
@@ -49,23 +49,23 @@ components:
 ---
 ## Overview
 
-Purpose-built for long-form reading. A paper-cream background, warm black ink, a rust signal. No chrome, no noise.
+A warm, high-contrast palette rooted in broadsheet newspapers and matte galleries. Deep ink on warm limestone, one single accent for action.
 
 ## Colors
 
 The palette is built around high-contrast neutrals and a single accent that drives interaction.
 
-- **Primary (`#1B1A17`):** Headlines and core text.
-- **Secondary (`#5C5A54`):** Borders, captions, and metadata.
-- **Tertiary (`#9C3B1B`):** The sole driver for interaction. Reserve it.
-- **Neutral (`#F5EFE1`):** The page foundation.
+- **Primary (`#1A1C1E`):** Headlines and core text.
+- **Secondary (`#6C7278`):** Borders, captions, and metadata.
+- **Tertiary (`#B8422E`):** The sole driver for interaction. Reserve it.
+- **Neutral (`#F7F5F2`):** The page foundation.
 
 ## Typography
 
-- **display:** Source Serif 4 4.5rem
-- **h1:** Source Serif 4 2.5rem
-- **body:** Source Serif 4 1.1rem
-- **label:** Source Sans 3 0.75rem
+- **display:** Fraunces 4rem
+- **h1:** Fraunces 2.5rem
+- **body:** Public Sans 1rem
+- **label:** Space Grotesk 0.75rem
 
 ## Do's and Don'ts
 

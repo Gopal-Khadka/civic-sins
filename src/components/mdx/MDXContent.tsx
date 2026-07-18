@@ -7,16 +7,16 @@ const mdxComponents = {
 	a: (props: ComponentProps<"a">) => (
 		<a
 			{...props}
-			className="text-rust underline-offset-2 hover:text-rust-hover"
+			className="text-primary underline-offset-2 hover:text-primary/80"
 		/>
 	),
 };
 
 const proseClasses =
-	"prose max-w-none prose-headings:font-serif prose-headings:font-medium prose-headings:text-ink " +
-	"prose-p:text-ink prose-li:text-ink prose-strong:text-ink prose-strong:font-semibold " +
-	"prose-a:text-rust prose-blockquote:border-rust prose-blockquote:text-ink-soft " +
-	"prose-code:text-ink prose-hr:border-border marker:text-rust";
+	"prose max-w-none prose-headings:font-serif prose-headings:font-medium prose-headings:text-foreground " +
+	"prose-p:text-foreground prose-li:text-foreground prose-strong:text-foreground prose-strong:font-semibold " +
+	"prose-a:text-primary prose-blockquote:border-primary prose-blockquote:text-muted-foreground " +
+	"prose-code:text-foreground prose-hr:border-border marker:text-primary";
 
 export function MDXContent({
 	code,

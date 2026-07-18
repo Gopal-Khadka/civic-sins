@@ -7,10 +7,10 @@ import { cn } from "#/lib/utils";
 export function Header() {
 	const BrandIcon = siteConfig.brandIcon;
 	return (
-		<header className="sticky top-0 z-40 border-b border-border bg-page/85 backdrop-blur">
+		<header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
 			<Container className="flex h-16 items-center justify-between gap-4">
-				<Link to="/" className="flex items-center gap-2 text-ink">
-					<BrandIcon className="size-5 text-rust" />
+				<Link to="/" className="flex items-center gap-2 text-foreground">
+					<BrandIcon className="size-5 text-primary" />
 					<span className="font-serif text-lg font-medium">
 						{siteConfig.name}
 					</span>
@@ -22,9 +22,9 @@ export function Header() {
 							key={item.to}
 							to={item.to}
 							className={cn(
-								"rounded-md px-3 py-2 text-sm text-ink-soft transition-colors hover:text-ink",
+								"rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground",
 							)}
-							activeProps={{ className: "text-rust" }}
+							activeProps={{ className: "text-primary" }}
 						>
 							{item.label}
 						</Link>

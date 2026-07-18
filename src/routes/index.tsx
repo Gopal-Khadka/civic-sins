@@ -29,13 +29,13 @@ function Home() {
 				<h1 className="display-title max-w-3xl text-balance">
 					{siteConfig.tagline}
 				</h1>
-				<p className="mt-6 max-w-xl text-lg text-ink-soft">
+				<p className="mt-6 max-w-xl text-lg text-muted-foreground">
 					{siteConfig.description}
 				</p>
 				<div className="mt-8 flex flex-wrap gap-3">
 					<Link
 						to={siteConfig.cta.to}
-						className={buttonVariants({ variant: "primary" })}
+						className={buttonVariants({ variant: "default" })}
 					>
 						{siteConfig.cta.label}
 						<ArrowRight className="size-4" />
@@ -53,12 +53,12 @@ function Home() {
 			{featured.length > 0 && (
 				<Container as="section" className="py-8">
 					<div className="mb-6 flex items-end justify-between">
-						<h2 className="font-serif text-2xl font-medium text-ink">
+						<h2 className="font-serif text-2xl font-medium text-foreground">
 							Fresh sins
 						</h2>
 						<Link
 							to="/comics"
-							className="text-sm text-rust hover:text-rust-hover"
+							className="text-sm text-primary hover:text-primary/80"
 						>
 							All comics →
 						</Link>
@@ -74,7 +74,7 @@ function Home() {
 			{/* Formats teaser */}
 			<Container as="section" className="py-16">
 				<p className="kicker mb-3">The recurring formats</p>
-				<h2 className="font-serif text-2xl font-medium text-ink">
+				<h2 className="font-serif text-2xl font-medium text-foreground">
 					Same sting, six shapes
 				</h2>
 				<div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -83,19 +83,21 @@ function Home() {
 							key={format.id}
 							className="flex flex-row items-start gap-4 p-6"
 						>
-							<format.icon className="size-6 shrink-0 text-rust" />
+							<format.icon className="size-6 shrink-0 text-primary" />
 							<div>
-								<h3 className="font-serif text-lg font-medium text-ink">
+								<h3 className="font-serif text-lg font-medium text-foreground">
 									{format.name}
 								</h3>
-								<p className="mt-1 text-sm text-ink-soft">{format.mechanic}</p>
+								<p className="mt-1 text-sm text-muted-foreground">
+									{format.mechanic}
+								</p>
 							</div>
 						</Card>
 					))}
 				</div>
 				<Link
 					to="/formats"
-					className="mt-6 inline-flex items-center gap-1 text-sm text-rust hover:text-rust-hover"
+					className="mt-6 inline-flex items-center gap-1 text-sm text-primary hover:text-primary/80"
 				>
 					How each one stings <ArrowRight className="size-4" />
 				</Link>

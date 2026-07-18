@@ -4,11 +4,15 @@ import { siteConfig } from "#/config/site";
 
 export function Footer() {
 	return (
-		<footer className="mt-20 border-t border-border bg-surface">
+		<footer className="mt-20 border-t border-border bg-card">
 			<Container className="flex flex-col gap-8 py-12 sm:flex-row sm:items-start sm:justify-between">
 				<div className="max-w-sm">
-					<p className="font-serif text-lg text-ink">{siteConfig.name}</p>
-					<p className="mt-2 text-sm text-ink-soft">{siteConfig.footer.note}</p>
+					<p className="font-serif text-lg text-foreground">
+						{siteConfig.name}
+					</p>
+					<p className="mt-2 text-sm text-muted-foreground">
+						{siteConfig.footer.note}
+					</p>
 				</div>
 
 				<nav className="flex flex-col gap-2">
@@ -16,7 +20,7 @@ export function Footer() {
 						<Link
 							key={item.to}
 							to={item.to}
-							className="text-sm text-ink-soft transition-colors hover:text-rust"
+							className="text-sm text-muted-foreground transition-colors hover:text-primary"
 						>
 							{item.label}
 						</Link>
@@ -33,7 +37,7 @@ export function Footer() {
 								aria-label={s.label}
 								target="_blank"
 								rel="noreferrer"
-								className="inline-flex size-9 items-center justify-center rounded-md border border-border text-ink-soft transition-colors hover:border-rust/40 hover:text-rust"
+								className="inline-flex size-9 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
 							>
 								<Icon className="size-[18px]" />
 							</a>

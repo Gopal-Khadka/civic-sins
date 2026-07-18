@@ -58,8 +58,8 @@ function FilterChip({
 			className={cn(
 				"rounded-md border px-3 py-1.5 text-sm transition-colors",
 				active
-					? "border-rust bg-rust text-on-accent"
-					: "border-border text-ink-soft hover:border-rust/40 hover:text-rust",
+					? "border-primary bg-primary text-primary-foreground"
+					: "border-border text-muted-foreground hover:border-primary/40 hover:text-primary",
 			)}
 		>
 			{label}
@@ -104,7 +104,9 @@ function ComicsPage() {
 			</div>
 
 			{comics.length === 0 ? (
-				<p className="text-ink-soft">No comics match that filter yet.</p>
+				<p className="text-muted-foreground">
+					No comics match that filter yet.
+				</p>
 			) : (
 				<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 					{comics.map((comic) => (

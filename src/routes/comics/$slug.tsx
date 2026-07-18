@@ -52,7 +52,7 @@ function ComicDetail() {
 		<Container as="section" size="narrow" className="py-12 sm:py-16">
 			<Link
 				to="/comics"
-				className="mb-8 inline-flex items-center gap-1 text-sm text-ink-soft hover:text-rust"
+				className="mb-8 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary"
 			>
 				<ArrowLeft className="size-4" /> All comics
 			</Link>

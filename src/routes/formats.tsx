@@ -32,16 +32,18 @@ function FormatsPage() {
 				{FORMATS.map((format) => (
 					<Card key={format.id} className="flex flex-col gap-3 p-6">
 						<div className="flex items-center gap-3">
-							<span className="inline-flex size-10 items-center justify-center rounded-md bg-muted text-rust">
+							<span className="inline-flex size-10 items-center justify-center rounded-md bg-muted text-primary">
 								<format.icon className="size-5" />
 							</span>
-							<h2 className="font-serif text-xl font-medium text-ink">
+							<h2 className="font-serif text-xl font-medium text-foreground">
 								{format.name}
 							</h2>
 						</div>
-						<p className="text-ink">{format.mechanic}</p>
-						<p className="text-sm text-ink-soft">
-							<span className="font-semibold text-ink">Why it stings:</span>{" "}
+						<p className="text-foreground">{format.mechanic}</p>
+						<p className="text-sm text-muted-foreground">
+							<span className="font-semibold text-foreground">
+								Why it stings:
+							</span>{" "}
 							{format.sting}
 						</p>
 					</Card>

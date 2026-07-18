@@ -24,7 +24,7 @@ export function PageWrap({
 					{kicker && <p className="kicker mb-3">{kicker}</p>}
 					{title && <h1 className="display-title text-balance">{title}</h1>}
 					{description && (
-						<p className="mt-4 text-lg text-ink-soft">{description}</p>
+						<p className="mt-4 text-lg text-muted-foreground">{description}</p>
 					)}
 				</header>
 			)}

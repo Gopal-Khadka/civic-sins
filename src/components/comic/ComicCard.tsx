@@ -13,7 +13,7 @@ export function ComicCard({ comic }: { comic: Comic }) {
 	return (
 		<Link to="/comics/$slug" params={{ slug: comic.slug }} className="group">
 			<Card className="flex h-full flex-col gap-0 p-0 transition-[transform,box-shadow] hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]">
-				<div className="flex items-end justify-center rounded-t-lg border-b border-border bg-comic-stage px-4 pt-6">
+				<div className="flex items-end justify-center rounded-t-lg border-b border-border bg-card px-4 pt-6">
 					<img
 						src={panelImageUrl(cover)}
 						alt={comic.title}
@@ -29,11 +29,11 @@ export function ComicCard({ comic }: { comic: Comic }) {
 							{format.name}
 						</Badge>
 					)}
-					<h3 className="font-serif text-xl font-medium text-ink transition-colors group-hover:text-rust">
+					<h3 className="font-serif text-xl font-medium text-foreground transition-colors group-hover:text-primary">
 						{comic.title}
 					</h3>
 					{comic.summary && (
-						<p className="text-sm text-ink-soft">{comic.summary}</p>
+						<p className="text-sm text-muted-foreground">{comic.summary}</p>
 					)}
 				</div>
 			</Card>

@@ -31,11 +31,13 @@ export function ComicStrip({ comic }: { comic: Comic }) {
 						</Badge>
 					))}
 				</div>
-				<h2 className="font-serif text-3xl font-medium text-ink">
+				<h2 className="font-serif text-3xl font-medium text-foreground">
 					{comic.title}
 				</h2>
 				{comic.summary && (
-					<p className="mt-2 max-w-2xl text-ink-soft">{comic.summary}</p>
+					<p className="mt-2 max-w-2xl text-muted-foreground">
+						{comic.summary}
+					</p>
 				)}
 			</header>
 

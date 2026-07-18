@@ -15,10 +15,13 @@ stop and surface it; the rule is wrong or the change is.
    `src/config/comics.ts` + `src/config/formats.ts`. Theme options →
    `src/config/theme.ts`. SEO/brand text → `src/config/seo.ts`. Env → `src/env.ts`
    (validated). Never hardcode a label, path, option list, or URL in a component.
-2. **Design tokens only — no raw values.** Colors, fonts, radii, shadows come from
-   `src/styles/tokens.css` + `src/styles/typography.css`, surfaced as Tailwind
-   utilities in `src/styles/app.css` (`bg-rust`, `text-ink`, `bg-surface`, …). No
-   raw hex, no one-off font sizes, no ad-hoc background colors. See `design.md`.
+2. **Semantic tokens only — no raw values.** Colors come from the shadcn/Base UI
+   semantic set in `src/styles/tokens.css` (`--background`, `--foreground`,
+   `--primary`, `--muted`, `--border`, …), surfaced as Tailwind utilities in
+   `src/styles/app.css` (`bg-background`, `text-foreground`, `bg-primary`,
+   `text-muted-foreground`, …). Fonts/type scale live in `typography.css`. No raw
+   hex, no one-off font sizes, no comic-era classes (`bg-rust`, `text-ink`). See
+   `design.md`.
 3. **Content lives in MDX, not components.** Comics → `src/content/comics/`, pages
    → `src/content/pages/`. Content-collections generates typed data; read it via
    `src/lib/content.ts`. Never inline copy that belongs in a `.mdx` file.
@@ -53,28 +56,32 @@ stop and surface it; the rule is wrong or the change is.
 
 ## UI rules
 
-- **Read `design.md` before building or changing UI.** It owns the visual direction.
-- **Keep the comic identity.** The palette is the editorial "Paper White / ink /
-  rust" system in `tokens.css` — warm paper surfaces, ink text, rust as the single
-  reserved accent. Do not introduce a generic neutral/gray design system.
+- **Read `design.md` before building or changing UI.** It owns the visual direction:
+  the "Heritage" system — architectural minimalism meets journalistic gravitas. Deep
+  ink (`#1A1C1E`) on warm limestone (`#F7F5F2`), one terracotta accent (`#B8422E`)
+  reserved for a single action per screen. Fraunces (display), Public Sans (body),
+  Space Grotesk (labels). Flat, no gradients, negative space is a feature.
 - **Add UI components with the shadcn CLI, don't hand-roll them.** Run
   `pnpm dlx shadcn@latest add <component>` (registry `base-nova`, Base UI + Phosphor).
   Components land in `src/components/ui/` as lowercase files (`button.tsx`,
   `badge.tsx`, `card.tsx`). Only write a component by hand when the registry has no
   equivalent (e.g. `Container.tsx`, the page-width wrapper).
-- **The comic palette comes from the token bridge, not from editing each component.**
-  shadcn components use semantic tokens (`bg-primary`, `bg-card`, `text-muted-foreground`,
-  …); `src/styles/app.css` maps those names onto our comic values (`--color-primary`
-  → rust, `--color-card` → surface, etc.). Added components render on-brand without
-  modification. If a component needs a token that isn't bridged yet, add the mapping
-  in `app.css` — don't hardcode a comic class inside the component.
+- **The palette lives in the tokens, not in each component.** shadcn components use
+  the semantic token names (`bg-primary`, `bg-card`, `text-muted-foreground`, …);
+  `tokens.css` gives those the Heritage values and `app.css` maps them to Tailwind,
+  so added components render on-brand unmodified. `--primary` is the terracotta
+  accent, so a default `<Button>` is the reserved action. Need a token that isn't
+  defined yet? Add it in `tokens.css` (light + dark) — never hardcode a hex in a
+  component.
 - **Icons: Phosphor, imported from `@phosphor-icons/react`.** Type icon props/props
   maps with the exported `Icon` type. Size with a `className` (`size-4`), not the
   `size` prop; adjust stroke look with Phosphor's `weight` prop — there is no
   `strokeWidth`. Never reintroduce lucide.
 - **No raw hex in UI.** Add or reuse a token in `styles/`, then consume it.
-- **One accent action per screen** (rust). Everything else is outline/ghost/ink.
-- **Component files are PascalCase** (`Button.tsx`, `ComicCard.tsx`).
+- **One accent action per screen** (terracotta `--primary`). Everything else is
+  `outline` / `ghost` / ink text.
+- **File naming**: shadcn `ui/` components are lowercase (`button.tsx`, `card.tsx`);
+  feature components are PascalCase (`ComicCard.tsx`, `Container.tsx`).
 
 ## Code quality
 

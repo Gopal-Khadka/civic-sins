@@ -1,71 +1,112 @@
 /* ===========================================================================
  * Color & shape tokens — the single source of truth.
- * Light palette = design.md "Paper White" (ink / cream / rust).
- * Dark palette = derived "ink page" inversion (design.md is light-only).
+ * Design system: "Heritage" (design.md) — architectural minimalism meets
+ * journalistic gravitas. Deep ink on warm limestone, one terracotta accent.
  *
- * Raw tokens are intentionally NOT named `--color-*`; styles/app.css maps them
- * into Tailwind's theme so utilities (bg-page, text-ink, text-rust …) resolve
- * to these vars and flip automatically with the `.dark` class.
- * Do NOT use Tailwind's default color palette anywhere — only these tokens.
+ * These are the shadcn / Base UI semantic tokens. Components added via
+ * `pnpm dlx shadcn@latest add …` consume them directly, so they render on-brand
+ * without edits. styles/app.css maps them into Tailwind's theme (bg-background,
+ * text-foreground, bg-primary …) and they flip with the `.dark` class.
+ * Use semantic tokens only — never raw hex or Tailwind's default palette.
  * ======================================================================== */
 
 :root {
 	color-scheme: light;
 
-	/* Ink — text */
-	--ink: #1b1a17; /* primary: headlines, body */
-	--ink-soft: #5c5a54; /* secondary: captions, metadata */
+	/* Heritage base — ink #1A1C1E on limestone #F7F5F2, terracotta #B8422E. */
+	--background: #f7f5f2; /* limestone — the page foundation */
+	--foreground: #1a1c1e; /* ink — headlines and body */
 
-	/* Rust — the sole interaction accent. Reserve it. */
-	--rust: #9c3b1b;
-	--rust-hover: #7e2f15;
-	--on-accent: #faf5e8; /* text/icon on a rust surface */
+	--card: #ffffff; /* raised surfaces */
+	--card-foreground: #1a1c1e;
+	--popover: #ffffff;
+	--popover-foreground: #1a1c1e;
 
-	/* Paper — surfaces */
-	--page: #f5efe1; /* neutral page foundation */
-	--surface: #faf5e8; /* cards, raised panels */
-	--surface-2: #efe7d4; /* nested / inset surfaces */
-	--muted: #ece3d0; /* chips, subtle fills */
-	--border: #ddd2bb; /* hairlines, dividers */
+	/* Primary = the single terracotta accent. Reserve it for one action/screen. */
+	--primary: #b8422e;
+	--primary-foreground: #ffffff;
 
-	/* Comic stage — where strips are drawn */
-	--comic-stage: #ffffff;
-	--bubble: #ffffff;
-	--bubble-ink: #1b1a17;
+	--secondary: #edeae4; /* quiet fills, secondary buttons */
+	--secondary-foreground: #1a1c1e;
+	--muted: #edeae4;
+	--muted-foreground: #6c7278; /* captions, metadata, borders' voice */
+	--accent: #efece6; /* hover wash */
+	--accent-foreground: #1a1c1e;
 
-	/* Destructive — errors only (never the rust accent). */
-	--destructive: #b91c1c;
+	--destructive: #b3261e; /* errors only — never the accent */
 
-	/* Effects */
-	--ring: var(--rust);
-	--shadow-sm: 0 1px 2px rgba(27, 26, 23, 0.06);
-	--shadow-md: 0 8px 24px rgba(27, 26, 23, 0.08);
-	--shadow-lg: 0 18px 44px rgba(27, 26, 23, 0.12);
+	--border: #e4dfd7; /* warm hairline */
+	--input: #e4dfd7;
+	--ring: #b8422e; /* focus ties to the accent */
+
+	/* Charts — editorial neutrals + accent. */
+	--chart-1: #b8422e;
+	--chart-2: #6c7278;
+	--chart-3: #1a1c1e;
+	--chart-4: #a98c6a;
+	--chart-5: #8fa29b;
+
+	/* Sidebar (defined for completeness; site has no sidebar yet). */
+	--sidebar: #f7f5f2;
+	--sidebar-foreground: #1a1c1e;
+	--sidebar-primary: #b8422e;
+	--sidebar-primary-foreground: #ffffff;
+	--sidebar-accent: #efece6;
+	--sidebar-accent-foreground: #1a1c1e;
+	--sidebar-border: #e4dfd7;
+	--sidebar-ring: #b8422e;
+
+	--radius: 0.5rem; /* design.md rounded.lg = 8px */
+
+	/* Elevation — warm ink shadows. */
+	--shadow-sm: 0 1px 2px rgba(26, 28, 30, 0.06);
+	--shadow-md: 0 8px 24px rgba(26, 28, 30, 0.08);
+	--shadow-lg: 0 18px 44px rgba(26, 28, 30, 0.12);
 }
 
 .dark {
 	color-scheme: dark;
 
-	--ink: #f5efe1;
-	--ink-soft: #a8a49a;
+	/* Derived "ink page" inversion (design.md is light-only). */
+	--background: #1a1917; /* warm charcoal */
+	--foreground: #f2eee7; /* warm off-white */
 
-	--rust: #d2693f; /* lifted for contrast on dark */
-	--rust-hover: #e2825c;
-	--on-accent: #16140f;
+	--card: #201f1c;
+	--card-foreground: #f2eee7;
+	--popover: #201f1c;
+	--popover-foreground: #f2eee7;
 
-	--page: #16140f;
-	--surface: #1f1d17;
-	--surface-2: #262219;
-	--muted: #211e17;
-	--border: #322e24;
+	--primary: #d2694f; /* terracotta lifted for dark contrast */
+	--primary-foreground: #ffffff;
 
-	--comic-stage: #211e17;
-	--bubble: #f5efe1;
-	--bubble-ink: #1b1a17;
+	--secondary: #2a2825;
+	--secondary-foreground: #f2eee7;
+	--muted: #2a2825;
+	--muted-foreground: #a8a29a;
+	--accent: #2a2825;
+	--accent-foreground: #f2eee7;
 
-	--destructive: #f87171;
+	--destructive: #e5674f;
 
-	--ring: var(--rust);
+	--border: #322e28;
+	--input: #38342e;
+	--ring: #d2694f;
+
+	--chart-1: #d2694f;
+	--chart-2: #a8a29a;
+	--chart-3: #f2eee7;
+	--chart-4: #c2a780;
+	--chart-5: #a5b8b1;
+
+	--sidebar: #201f1c;
+	--sidebar-foreground: #f2eee7;
+	--sidebar-primary: #d2694f;
+	--sidebar-primary-foreground: #ffffff;
+	--sidebar-accent: #2a2825;
+	--sidebar-accent-foreground: #f2eee7;
+	--sidebar-border: #322e28;
+	--sidebar-ring: #d2694f;
+
 	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
 	--shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
 	--shadow-lg: 0 18px 44px rgba(0, 0, 0, 0.55);
