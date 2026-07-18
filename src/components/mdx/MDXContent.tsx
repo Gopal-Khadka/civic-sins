@@ -4,12 +4,17 @@ import { cn } from "#/lib/utils";
 
 /** Map of components available to all MDX documents (extend as needed). */
 const mdxComponents = {
-	a: (props: ComponentProps<"a">) => (
-		<a
-			{...props}
-			className="text-primary underline-offset-2 hover:text-primary/80"
-		/>
-	),
+	a: ({ href, ...props }: ComponentProps<"a">) => {
+		const external = typeof href === "string" && /^https?:\/\//.test(href);
+		return (
+			<a
+				href={href}
+				{...(external ? { target: "_blank", rel: "noreferrer noopener" } : {})}
+				{...props}
+				className="text-primary underline-offset-2 hover:text-primary/80"
+			/>
+		);
+	},
 };
 
 const proseClasses =

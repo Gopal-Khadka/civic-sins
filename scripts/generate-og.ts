@@ -16,6 +16,7 @@ import { seoConfig } from "../src/config/seo.ts";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const comicsDir = join(root, "src/content/comics");
+const pagesDir = join(root, "src/content/pages");
 const fontsDir = join(root, "assets/fonts");
 const outDir = join(root, "public/og");
 
@@ -180,14 +181,26 @@ async function main() {
 		writeFileSync(join(outDir, `${slug}.png`), png);
 	}
 
+	// Static content pages (about, privacy, formats, …).
+	const pageFiles = readdirSync(pagesDir).filter((f) => f.endsWith(".mdx"));
+	for (const file of pageFiles) {
+		const { data } = matter(readFileSync(join(pagesDir, file), "utf8"));
+		const slug = file.replace(/\.mdx$/, "");
+		const png = await renderPng(
+			card({ title: String(data.title ?? slug), footer: seoConfig.name }),
+		);
+		writeFileSync(join(outDir, `${slug}.png`), png);
+	}
+
 	// Site default card.
 	const fallback = await renderPng(
 		card({ title: seoConfig.name, footer: "Civic sense, minus the lecture" }),
 	);
 	writeFileSync(join(outDir, "default.png"), fallback);
 
+	const total = files.length + pageFiles.length + 1;
 	console.log(
-		`[og] generated ${files.length + 1} OG cards in public/og/ (${process.env.VITE_SITE_URL ?? "default origin"})`,
+		`[og] generated ${total} OG cards in public/og/ (${process.env.VITE_SITE_URL ?? "default origin"})`,
 	);
 }
 

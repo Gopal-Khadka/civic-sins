@@ -1,5 +1,5 @@
 import type { Icon } from "@phosphor-icons/react";
-import { GithubLogo, InstagramLogo, SealWarning } from "@phosphor-icons/react";
+import { GithubLogo, SealWarning } from "@phosphor-icons/react";
 import { DEFAULT_SITE_URL, seoConfig, socialLinks } from "#/config/seo";
 
 /**
@@ -23,7 +23,6 @@ export interface SocialLink {
 
 /** Phosphor icon per social profile, keyed by the label used in `seo.ts`. */
 const socialIcons: Record<string, Icon> = {
-	Instagram: InstagramLogo,
 	GitHub: GithubLogo,
 };
 
@@ -39,6 +38,14 @@ export const siteConfig = {
 		{ label: "Comics", to: "/comics" },
 		{ label: "Formats", to: "/formats" },
 		{ label: "Principles", to: "/principles" },
+		{ label: "About", to: "/about" },
+	] satisfies NavItem[],
+
+	/** Secondary footer links (meta + legal). */
+	more: [
+		{ label: "Colophon", to: "/colophon" },
+		{ label: "Privacy", to: "/privacy" },
+		{ label: "Terms", to: "/terms" },
 	] satisfies NavItem[],
 
 	cta: { label: "Read comics", to: "/comics" },

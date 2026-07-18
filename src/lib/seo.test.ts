@@ -48,7 +48,7 @@ describe("seo", () => {
 		const { meta } = seo({ path: "/" });
 		const title = meta.find((m) => m.title)?.title ?? "";
 		expect(title).toContain("Civic Sins");
-		expect(title).toContain("—");
+		expect(title).toContain("You do this too.");
 	});
 
 	it("omits keywords when none are given", () => {

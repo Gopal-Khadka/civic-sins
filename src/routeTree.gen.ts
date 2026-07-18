@@ -9,12 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PrinciplesRouteImport } from './routes/principles'
 import { Route as FormatsRouteImport } from './routes/formats'
+import { Route as ColophonRouteImport } from './routes/colophon'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ComicsIndexRouteImport } from './routes/comics/index'
 import { Route as ComicsSlugRouteImport } from './routes/comics/$slug'
 
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrinciplesRoute = PrinciplesRouteImport.update({
   id: '/principles',
   path: '/principles',
@@ -23,6 +37,16 @@ const PrinciplesRoute = PrinciplesRouteImport.update({
 const FormatsRoute = FormatsRouteImport.update({
   id: '/formats',
   path: '/formats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ColophonRoute = ColophonRouteImport.update({
+  id: '/colophon',
+  path: '/colophon',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -43,50 +67,102 @@ const ComicsSlugRoute = ComicsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/colophon': typeof ColophonRoute
   '/formats': typeof FormatsRoute
   '/principles': typeof PrinciplesRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/comics/$slug': typeof ComicsSlugRoute
   '/comics/': typeof ComicsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/colophon': typeof ColophonRoute
   '/formats': typeof FormatsRoute
   '/principles': typeof PrinciplesRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/comics/$slug': typeof ComicsSlugRoute
   '/comics': typeof ComicsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/colophon': typeof ColophonRoute
   '/formats': typeof FormatsRoute
   '/principles': typeof PrinciplesRoute
+  '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/comics/$slug': typeof ComicsSlugRoute
   '/comics/': typeof ComicsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/formats' | '/principles' | '/comics/$slug' | '/comics/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/colophon'
+    | '/formats'
+    | '/principles'
+    | '/privacy'
+    | '/terms'
+    | '/comics/$slug'
+    | '/comics/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/formats' | '/principles' | '/comics/$slug' | '/comics'
+  to:
+    | '/'
+    | '/about'
+    | '/colophon'
+    | '/formats'
+    | '/principles'
+    | '/privacy'
+    | '/terms'
+    | '/comics/$slug'
+    | '/comics'
   id:
     | '__root__'
     | '/'
+    | '/about'
+    | '/colophon'
     | '/formats'
     | '/principles'
+    | '/privacy'
+    | '/terms'
     | '/comics/$slug'
     | '/comics/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ColophonRoute: typeof ColophonRoute
   FormatsRoute: typeof FormatsRoute
   PrinciplesRoute: typeof PrinciplesRoute
+  PrivacyRoute: typeof PrivacyRoute
+  TermsRoute: typeof TermsRoute
   ComicsSlugRoute: typeof ComicsSlugRoute
   ComicsIndexRoute: typeof ComicsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/principles': {
       id: '/principles'
       path: '/principles'
@@ -99,6 +175,20 @@ declare module '@tanstack/react-router' {
       path: '/formats'
       fullPath: '/formats'
       preLoaderRoute: typeof FormatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/colophon': {
+      id: '/colophon'
+      path: '/colophon'
+      fullPath: '/colophon'
+      preLoaderRoute: typeof ColophonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -127,8 +217,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ColophonRoute: ColophonRoute,
   FormatsRoute: FormatsRoute,
   PrinciplesRoute: PrinciplesRoute,
+  PrivacyRoute: PrivacyRoute,
+  TermsRoute: TermsRoute,
   ComicsSlugRoute: ComicsSlugRoute,
   ComicsIndexRoute: ComicsIndexRoute,
 }

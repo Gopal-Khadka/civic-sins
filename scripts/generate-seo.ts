@@ -72,6 +72,10 @@ const sitemapEntries: SitemapEntry[] = [
 	{ path: "/comics", priority: "0.9", lastmod: latest },
 	{ path: "/formats", priority: "0.7" },
 	{ path: "/principles", priority: "0.7" },
+	{ path: "/about", priority: "0.6" },
+	{ path: "/colophon", priority: "0.4" },
+	{ path: "/privacy", priority: "0.3" },
+	{ path: "/terms", priority: "0.3" },
 	...comics.map((c) => ({
 		path: `/comics/${c.slug}`,
 		priority: "0.8",
@@ -134,13 +138,15 @@ const llms = `# ${seoConfig.name}
 
 > ${seoConfig.description}
 
-${seoConfig.name} is a satirical comic project that teaches civic sense through self-implicating humor — the narrator is always the worst offender. It is not political, not for profit, and targets behaviours, never people.
+${seoConfig.name} is a satirical comic project that teaches civic sense through self-implicating humor, where the narrator is always the worst offender. It is not political, not for profit, and targets behaviours, never people.
 
 ## Pages
 
 - [Comics](${abs("/comics")}): the full gallery of strips
 - [Formats](${abs("/formats")}): the recurring comic formats and why each one works
 - [Principles](${abs("/principles")}): the craft pillars behind the project
+- [About](${abs("/about")}): what the project is and who makes it
+- [Colophon](${abs("/colophon")}): the tools, type, and people behind the site
 
 ## Comics
 
