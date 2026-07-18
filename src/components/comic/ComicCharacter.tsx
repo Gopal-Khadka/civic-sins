@@ -1,4 +1,3 @@
-import { getCharacter } from "#/config/comics";
 import { type PanelLike, panelImageUrl } from "#/lib/comicgen";
 import { cn } from "#/lib/utils";
 
@@ -8,12 +7,14 @@ interface ComicCharacterProps {
 }
 
 export function ComicCharacter({ panel, className }: ComicCharacterProps) {
-	const char = getCharacter(panel.character);
 	return (
 		<img
 			src={panelImageUrl(panel)}
-			alt={`${char.label}, looking ${panel.emotion}`}
+			alt=""
 			loading="lazy"
+			onError={(event) => {
+				event.currentTarget.hidden = true;
+			}}
 			className={cn(
 				"h-44 w-auto select-none sm:h-52",
 				panel.flip && "-scale-x-100",
