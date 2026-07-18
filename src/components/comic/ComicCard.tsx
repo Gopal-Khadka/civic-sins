@@ -5,6 +5,16 @@ import type { Comic } from "#/lib/content";
 import { cn } from "#/lib/utils";
 import { SceneBackplate } from "./SceneBackplate";
 
+type Panel = Comic["panels"][number];
+
+function coverPanel(comic: Comic): Panel {
+	return (
+		comic.panels.find((panel) => panel.dialogue) ??
+		comic.panels.find((panel) => panel.narration) ??
+		comic.panels[0]
+	);
+}
+
 /** Compact preview used in the gallery grid — a clipped comic panel. */
 export function ComicCard({
 	comic,
@@ -16,7 +26,7 @@ export function ComicCard({
 	className?: string;
 }) {
 	const format = getFormat(comic.format);
-	const cover = comic.panels[comic.panels.length - 1] ?? comic.panels[0];
+	const cover = coverPanel(comic);
 	const compact = variant === "compact";
 
 	return (
@@ -36,8 +46,11 @@ export function ComicCard({
 				<SceneBackplate scene={cover?.scene} />
 				<img
 					src={panelImageUrl(cover)}
-					alt={comic.title}
+					alt=""
 					loading="lazy"
+					onError={(event) => {
+						event.currentTarget.hidden = true;
+					}}
 					className={cn("relative z-10 w-auto", compact ? "h-32" : "h-40")}
 					draggable={false}
 				/>

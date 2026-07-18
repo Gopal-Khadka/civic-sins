@@ -9,7 +9,7 @@ function gridCols(count: number): string {
 	if (count <= 1) return "max-w-sm";
 	if (count === 2) return "sm:grid-cols-2";
 	if (count === 3) return "sm:grid-cols-2 lg:grid-cols-3";
-	return "sm:grid-cols-2 lg:grid-cols-4";
+	return "sm:grid-cols-2";
 }
 
 export function ComicStrip({ comic }: { comic: Comic }) {
