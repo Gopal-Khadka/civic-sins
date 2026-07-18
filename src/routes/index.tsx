@@ -2,7 +2,6 @@ import { ArrowRight } from "@phosphor-icons/react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ComicCard } from "#/components/comic/ComicCard";
 import { ComicLede } from "#/components/comic/ComicLede";
-import { buttonVariants } from "#/components/ui/button";
 import { Container } from "#/components/ui/Container";
 import { FORMATS, TAGS } from "#/config/comics";
 import { siteConfig } from "#/config/site";
@@ -35,17 +34,17 @@ function Home() {
 						<p className="mt-6 max-w-md text-lg text-muted-foreground">
 							{siteConfig.description}
 						</p>
-						<div className="mt-8 flex flex-wrap gap-3">
+						<div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
 							<Link
 								to={siteConfig.cta.to}
-								className={buttonVariants({ variant: "default" })}
+								className="inline-flex items-center justify-center gap-2 border-[3px] border-foreground bg-primary px-6 py-3 font-extrabold text-primary-foreground transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[var(--shadow-hard)]"
 							>
 								{siteConfig.cta.label}
-								<ArrowRight className="size-4" weight="bold" />
+								<ArrowRight className="size-4 shrink-0" weight="bold" />
 							</Link>
 							<Link
 								to="/principles"
-								className={buttonVariants({ variant: "outline" })}
+								className="inline-flex items-center justify-center border-[3px] border-foreground bg-background px-6 py-3 font-extrabold text-foreground transition-colors hover:bg-foreground hover:text-background"
 							>
 								Why it exists
 							</Link>
