@@ -1,10 +1,15 @@
+# Dependabot version updates are PAUSED — no automatic or periodic PRs.
+# `open-pull-requests-limit: 0` stops Dependabot from opening version-update PRs
+# while keeping this config (grouping, commit prefixes) ready to re-enable.
+# To resume automatic updates, raise the limit (e.g. back to 5).
+# Dependencies are bumped manually for now (e.g. `pnpm update`).
 version: 2
 updates:
   - package-ecosystem: npm
     directory: "/"
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 0
     commit-message:
       prefix: "fix(deps)"
       prefix-development: "chore(deps)"
@@ -17,5 +22,6 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
+    open-pull-requests-limit: 0
     commit-message:
       prefix: "ci(deps)"

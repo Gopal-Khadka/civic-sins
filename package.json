@@ -16,6 +16,7 @@
     "generate-routes": "tsr generate",
     "seo:generate": "node scripts/generate-seo.ts",
     "og:generate": "node scripts/generate-og.ts",
+    "icons:generate": "node scripts/generate-icons.ts",
     "assets:generate": "pnpm seo:generate && pnpm og:generate",
     "prebuild": "pnpm assets:generate",
     "build": "vite build",

@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ComicCard } from "#/components/comic/ComicCard";
+import { ComicLede } from "#/components/comic/ComicLede";
 import { PageWrap } from "#/components/layout/PageWrap";
-import { FORMATS, TAGS } from "#/config/comics";
+import { FORMATS, getFormat, TAGS } from "#/config/comics";
 import { filterComics, getComics } from "#/lib/content";
 import { collectionPageJsonLd, jsonLdScript, seo } from "#/lib/seo";
 import { cn } from "#/lib/utils";
@@ -94,7 +95,9 @@ function ComicsPage() {
 			{/* Format filters — secondary, tucked into a collapsible row */}
 			<details className="mb-10 border-b-[3px] border-foreground pb-4">
 				<summary className="stamp cursor-pointer select-none text-muted-foreground">
-					Filter by format {format ? "(1)" : ""}
+					{format
+						? `Format: ${getFormat(format)?.stamp ?? format}`
+						: "Filter by format"}
 				</summary>
 				<div className="mt-3 flex flex-wrap gap-2">
 					<FilterChip label="Any format" active={!format} search={{ tag }} />
@@ -114,10 +117,16 @@ function ComicsPage() {
 					No public offences found. Suspiciously well-behaved.
 				</p>
 			) : (
-				<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-					{comics.map((comic) => (
-						<ComicCard key={comic.slug} comic={comic} />
-					))}
+				<div className="flex flex-col gap-5">
+					{/* Lead strip runs large; the rest fill an even grid below. */}
+					<ComicLede comic={comics[0]} />
+					{comics.length > 1 && (
+						<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+							{comics.slice(1).map((comic) => (
+								<ComicCard key={comic.slug} comic={comic} />
+							))}
+						</div>
+					)}
 				</div>
 			)}
 		</PageWrap>

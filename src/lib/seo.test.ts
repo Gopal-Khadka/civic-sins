@@ -33,7 +33,10 @@ describe("absoluteUrl", () => {
 describe("seo", () => {
 	it("templates the title and sets canonical + og:url", () => {
 		const { meta, links } = seo({ title: "Comics", path: "/comics" });
-		expect(meta.find((m) => m.title)?.title).toContain("Comics");
+		const title = meta.find((m) => m.title)?.title ?? "";
+		expect(title).toContain("Comics");
+		expect(title).toContain("| Civic Sins");
+		expect(title).not.toContain("—");
 		expect(links).toContainEqual({
 			rel: "canonical",
 			href: `${siteUrl}/comics`,

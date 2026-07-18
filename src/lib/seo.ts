@@ -62,8 +62,8 @@ export function seo({
 	keywords,
 }: SeoOptions = {}): { meta: MetaTag[]; links: LinkTag[] } {
 	const fullTitle = title
-		? `${title} · ${seoConfig.name}`
-		: `${seoConfig.name} · ${seoConfig.tagline}`;
+		? `${title} | ${seoConfig.name}`
+		: `${seoConfig.name}: ${seoConfig.tagline}`;
 	const url = absoluteUrl(path);
 	const alt = imageAlt ?? `${seoConfig.name}: ${title ?? seoConfig.tagline}`;
 
