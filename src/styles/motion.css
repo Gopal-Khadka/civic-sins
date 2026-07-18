@@ -1,0 +1,43 @@
+/* ===========================================================================
+ * Motion — editorial, restrained. Entry reveals + textures for the "Notice"
+ * system. Motion signals hierarchy, never spectacle.
+ *
+ * Reveals are gated behind `.js` (added synchronously before paint in __root)
+ * so no-JS visitors always see content, and behind `prefers-reduced-motion:
+ * no-preference` so reduced-motion visitors get everything statically.
+ * Animate only `transform` / `opacity` (GPU-safe). Custom easing, never linear.
+ * ======================================================================== */
+
+:root {
+	--ease-settle: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	/* Fade-up-on-enter. Elements carry `data-reveal`; JS adds `.is-visible`.
+	 * `will-change` is scoped to the pre-reveal state only, so layers are
+	 * released once the element has settled (leaving it on lags scroll). */
+	.js [data-reveal] {
+		opacity: 0;
+		transform: translateY(1rem);
+		transition-property: opacity, transform;
+		transition-duration: 0.6s;
+		transition-timing-function: var(--ease-settle);
+		will-change: transform, opacity;
+	}
+
+	.js [data-reveal].is-visible {
+		opacity: 1;
+		transform: none;
+		will-change: auto;
+	}
+}
+
+/* Halftone dot texture — a printed-paper wash. Drop as a low-opacity,
+ * pointer-events-none overlay inside a relatively-positioned parent. */
+.halftone {
+	background-image: radial-gradient(
+		var(--foreground) 0.5px,
+		transparent 0.6px
+	);
+	background-size: 7px 7px;
+}

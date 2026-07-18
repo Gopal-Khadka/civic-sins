@@ -65,8 +65,11 @@ broadsheet essay. Loud where it needs to be, flat everywhere else.
   filters. Reserve it — one loud thing per screen.
 - **Ink-soft (`#6B6558`):** Captions, metadata, secondary text.
 - **Scene colors** (`#2F6E8F` blue, `#E0A92E` yellow, `#4E8A5B` green): used
-  **only inside comic panels** to tint a setting — a bus, a street, a queue.
-  Never as UI accents.
+  **only inside comic panels** to place a setting. They tint the panel *and*
+  draw the scene backplate — simple graphic line art (bus windows and handles,
+  a curb and storm drain, parking bays, a traffic light, a court bench). One
+  reusable backplate per scene, keyed off the panel's `scene`
+  (`SceneBackplate.tsx`), sitting behind the character. Never UI accents.
 
 ## Typography
 
@@ -84,11 +87,48 @@ Fraunces is gone. This is not a heritage broadsheet.
 - **Cards:** avoid the generic three-equal-card grid. Use cards only when they
   represent a real comic object, and keep the radius tight.
 
+## Layering
+
+The page is flat by default, but major objects sit up off the paper as physical
+things — never a soft floating card, always a hard-edged printed one.
+
+- **Paper tray (`PaperTray.tsx`):** the layered "double-bezel", adapted to paper.
+  An outer ink-bordered mat with a faint halftone print texture holds an inner
+  object (which brings its own 3px border), giving concentric rules and a hard
+  offset shadow (`--shadow-hard`, `4px 4px 0`, no blur). Reserve it for major
+  objects: the hero strip, the featured gallery lead, the share prompt. Don't
+  wrap every chip or row — nesting everything reads as SaaS hardware, not satire.
+- **Rotation:** a slight `±1–2°` tilt on desktop makes trays and cards read as
+  posted, hand-placed strips. Straighten on hover. Remove all rotation below
+  `lg` (`motion-reduce:rotate-0` too) — tilts fight touch targets on mobile.
+
+## Nav
+
+The header is a **floating notice bar**, not a full-width bar glued to the top:
+a detached, max-width paper ticket (3px ink border, hard shadow, paper
+translucency + backdrop-blur), text-only links, the warning-seal mark. On mobile
+it opens a full-screen "posted notice" menu whose links stagger in.
+
+## Motion
+
+Editorial, not spectacle. Motion signals hierarchy and reading order.
+
+- **Reveal on enter:** content fades up once as it scrolls in (`Reveal` +
+  `motion.css`). Animate only `transform`/`opacity`; custom easing, never linear.
+- **Tactile hover/press:** cards lift with a hard offset shadow; the primary CTA
+  is a ticket that presses down on `:active`, its trailing icon riding its own
+  capsule that shifts on hover. Filter chips press physically.
+- **Always** honour `prefers-reduced-motion` (everything resolves statically) and
+  never gate content behind an animation for no-JS visitors.
+
 ## Do's and Don'ts
 
 - **Do** keep one red-orange action per screen.
 - **Do** give comic panels thick ink borders — they should read as strips, not UI.
-- **Do** use scene colors to place characters in a real civic setting.
+- **Do** use scene colors and backplates to place characters in a real setting.
+- **Do** reserve the one rounded, ticket-shaped object for the primary CTA — it is
+  the deliberate exception to the flat, square rule.
 - **Don't** use Fraunces or any serif display face.
-- **Don't** reach for gradients, soft shadows, or rounded app-cards. Flat and hard.
+- **Don't** reach for gradients, soft/blurred shadows, or rounded app-cards. Hard
+  offset shadows only.
 - **Don't** decorate nav or format cards with literal icons. Text and stamps carry it.

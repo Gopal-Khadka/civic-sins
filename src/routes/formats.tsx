@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageWrap } from "#/components/layout/PageWrap";
 import { MDXContent } from "#/components/mdx/MDXContent";
+import { Reveal } from "#/components/motion/Reveal";
 import { FORMATS } from "#/config/comics";
 import { getPage } from "#/lib/content";
 import { seo } from "#/lib/seo";
@@ -21,14 +22,15 @@ function FormatsPage() {
 
 	return (
 		<PageWrap
-			kicker="The recurring formats"
+			kicker="How the jokes work"
 			title={page?.title ?? "Six ways to sting"}
 			description={page?.description}
 		>
 			{page?.body && <MDXContent code={page.body} className="mb-12" />}
 
-			{/* Writer's room board — one row per format */}
-			<div className="border-[3px] border-foreground">
+			{/* Writer's room board — one row per format. Revealed as a single
+			    object so the shared ink rules don't jitter against each other. */}
+			<Reveal className="border-[3px] border-foreground">
 				{FORMATS.map((format, i) => (
 					<div
 						key={format.id}
@@ -47,13 +49,15 @@ function FormatsPage() {
 						<div>
 							<p className="text-foreground">{format.mechanic}</p>
 							<p className="mt-2 text-sm text-muted-foreground">
-								<span className="stamp text-primary">Why it stings</span>{" "}
+								<span className="stamp mb-1 block text-primary sm:mb-0 sm:mr-1.5 sm:inline">
+									Why it stings
+								</span>
 								{format.sting}
 							</p>
 						</div>
 					</div>
 				))}
-			</div>
+			</Reveal>
 		</PageWrap>
 	);
 }

@@ -1,6 +1,7 @@
 import { Check, Copy, PaperPlaneTilt } from "@phosphor-icons/react";
 import { useState } from "react";
-import { Button } from "#/components/ui/button";
+import { CtaLabel, ctaButtonClasses } from "#/components/ui/cta-button";
+import { PaperTray } from "#/components/ui/PaperTray";
 import type { Comic } from "#/lib/content";
 
 /**
@@ -29,22 +30,32 @@ export function SharePrompt({ comic }: { comic: Comic }) {
 		setTimeout(() => setCopied(false), 2000);
 	};
 
+	const ActionIcon = copied
+		? Check
+		: navigatorHasShare()
+			? PaperPlaneTilt
+			: Copy;
+
 	return (
-		<div className="mt-8 flex flex-col items-start gap-4 border-[3px] border-foreground bg-card p-5 sm:flex-row sm:items-center sm:justify-between">
-			<p className="text-lg font-bold text-foreground">
-				{comic.sharePrompt ?? "Know someone who does this?"}
-			</p>
-			<Button onClick={share} size="sm" className="shrink-0">
-				{copied ? (
-					<Check className="size-4" />
-				) : navigatorHasShare() ? (
-					<PaperPlaneTilt className="size-4" />
-				) : (
-					<Copy className="size-4" />
-				)}
-				{copied ? "Link copied" : "Send it to them"}
-			</Button>
-		</div>
+		<PaperTray className="mt-8">
+			<div className="flex flex-col items-start gap-4 border-[3px] border-foreground bg-card p-5 sm:flex-row sm:items-center sm:justify-between">
+				<p className="text-lg font-bold text-foreground">
+					{comic.sharePrompt ?? "Know someone who does this?"}
+				</p>
+				<button
+					type="button"
+					onClick={share}
+					className={ctaButtonClasses({
+						withIcon: true,
+						className: "shrink-0",
+					})}
+				>
+					<CtaLabel icon={ActionIcon}>
+						{copied ? "Link copied" : "Send it"}
+					</CtaLabel>
+				</button>
+			</div>
+		</PaperTray>
 	);
 }
 

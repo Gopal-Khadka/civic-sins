@@ -1,3 +1,4 @@
+import { Reveal } from "#/components/motion/Reveal";
 import { getFormat, getTag } from "#/config/comics";
 import type { Comic } from "#/lib/content";
 import { cn } from "#/lib/utils";
@@ -46,10 +47,13 @@ export function ComicStrip({ comic }: { comic: Comic }) {
 				className={cn("grid grid-cols-1 gap-4", gridCols(comic.panels.length))}
 			>
 				{comic.panels.map((panel, i) => (
-					<ComicPanel
+					<Reveal
 						key={`${panel.character}-${panel.emotion}-${panel.pose}-${panel.dialogue ?? panel.caption ?? i}`}
-						panel={panel}
-					/>
+						delay={i * 70}
+						className="h-full"
+					>
+						<ComicPanel panel={panel} />
+					</Reveal>
 				))}
 			</div>
 

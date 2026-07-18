@@ -1,5 +1,10 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
-import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import {
+	createRootRoute,
+	HeadContent,
+	ScriptOnce,
+	Scripts,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { Analytics } from "#/components/analytics/Analytics";
 import { Footer } from "#/components/layout/Footer";
@@ -98,6 +103,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
+				{/* Gate reveal animations behind JS so no-JS visitors always see
+				    content. Runs synchronously before the body paints. */}
+				<ScriptOnce>{`document.documentElement.classList.add("js")`}</ScriptOnce>
 				<ThemeProvider>
 					<Analytics />
 					<div className="flex min-h-dvh flex-col">
