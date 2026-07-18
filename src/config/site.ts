@@ -1,13 +1,13 @@
-import type { LucideIcon } from "lucide-react";
+import type { Icon } from "@phosphor-icons/react";
 import {
 	BookOpen,
-	Github,
-	Instagram,
-	Layers,
-	ScrollText,
-	Send,
-	Sparkles,
-} from "lucide-react";
+	GithubLogo,
+	InstagramLogo,
+	PaperPlaneTilt,
+	Scroll,
+	Sparkle,
+	StackSimple,
+} from "@phosphor-icons/react";
 import { DEFAULT_SITE_URL, seoConfig, socialLinks } from "#/config/seo";
 
 /**
@@ -21,19 +21,19 @@ import { DEFAULT_SITE_URL, seoConfig, socialLinks } from "#/config/seo";
 export interface NavItem {
 	label: string;
 	to: string;
-	icon: LucideIcon;
+	icon: Icon;
 }
 
 export interface SocialLink {
 	label: string;
 	href: string;
-	icon: LucideIcon;
+	icon: Icon;
 }
 
-/** Lucide icon per social profile, keyed by the label used in `seo.ts`. */
-const socialIcons: Record<string, LucideIcon> = {
-	Instagram,
-	GitHub: Github,
+/** Phosphor icon per social profile, keyed by the label used in `seo.ts`. */
+const socialIcons: Record<string, Icon> = {
+	Instagram: InstagramLogo,
+	GitHub: GithubLogo,
 };
 
 export const siteConfig = {
@@ -42,19 +42,19 @@ export const siteConfig = {
 	tagline: seoConfig.tagline,
 	description: seoConfig.description,
 	url: DEFAULT_SITE_URL,
-	brandIcon: Sparkles as LucideIcon,
+	brandIcon: Sparkle as Icon,
 
 	nav: [
 		{ label: "Comics", to: "/comics", icon: BookOpen },
-		{ label: "Formats", to: "/formats", icon: Layers },
-		{ label: "Principles", to: "/principles", icon: ScrollText },
+		{ label: "Formats", to: "/formats", icon: StackSimple },
+		{ label: "Principles", to: "/principles", icon: Scroll },
 	] satisfies NavItem[],
 
-	cta: { label: "Read the comics", to: "/comics", icon: Send },
+	cta: { label: "Read the comics", to: "/comics", icon: PaperPlaneTilt },
 
 	social: socialLinks.map((s) => ({
 		...s,
-		icon: socialIcons[s.label] ?? Sparkles,
+		icon: socialIcons[s.label] ?? Sparkle,
 	})) satisfies SocialLink[],
 
 	footer: {

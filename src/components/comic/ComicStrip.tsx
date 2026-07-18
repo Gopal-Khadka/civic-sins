@@ -1,4 +1,4 @@
-import { Badge } from "#/components/ui/Badge";
+import { Badge } from "#/components/ui/badge";
 import { getFormat, getTag } from "#/config/comics";
 import type { Comic } from "#/lib/content";
 import { cn } from "#/lib/utils";
@@ -20,8 +20,8 @@ export function ComicStrip({ comic }: { comic: Comic }) {
 			<header className="mb-6">
 				<div className="mb-3 flex flex-wrap items-center gap-2">
 					{format && (
-						<Badge variant="solid">
-							<format.icon className="size-3.5" strokeWidth={2} />
+						<Badge variant="default">
+							<format.icon className="size-3.5" />
 							{format.name}
 						</Badge>
 					)}

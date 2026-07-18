@@ -1,5 +1,5 @@
+import { ArrowLeft } from "@phosphor-icons/react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
 import { ComicStrip } from "#/components/comic/ComicStrip";
 import { MDXContent } from "#/components/mdx/MDXContent";
 import { Container } from "#/components/ui/Container";

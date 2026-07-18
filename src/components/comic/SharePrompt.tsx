@@ -1,6 +1,6 @@
-import { Check, Copy, Send } from "lucide-react";
+import { Check, Copy, PaperPlaneTilt } from "@phosphor-icons/react";
 import { useState } from "react";
-import { Button } from "#/components/ui/Button";
+import { Button } from "#/components/ui/button";
 import type { Comic } from "#/lib/content";
 
 /**
@@ -38,7 +38,7 @@ export function SharePrompt({ comic }: { comic: Comic }) {
 				{copied ? (
 					<Check className="size-4" />
 				) : navigatorHasShare() ? (
-					<Send className="size-4" />
+					<PaperPlaneTilt className="size-4" />
 				) : (
 					<Copy className="size-4" />
 				)}

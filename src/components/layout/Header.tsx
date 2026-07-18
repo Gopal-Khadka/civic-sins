@@ -10,7 +10,7 @@ export function Header() {
 		<header className="sticky top-0 z-40 border-b border-border bg-page/85 backdrop-blur">
 			<Container className="flex h-16 items-center justify-between gap-4">
 				<Link to="/" className="flex items-center gap-2 text-ink">
-					<BrandIcon className="size-5 text-rust" strokeWidth={1.75} />
+					<BrandIcon className="size-5 text-rust" />
 					<span className="font-serif text-lg font-medium">
 						{siteConfig.name}
 					</span>

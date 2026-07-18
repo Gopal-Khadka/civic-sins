@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Badge } from "#/components/ui/Badge";
-import { Card } from "#/components/ui/Card";
+import { Badge } from "#/components/ui/badge";
+import { Card } from "#/components/ui/card";
 import { getFormat } from "#/config/comics";
 import { panelImageUrl } from "#/lib/comicgen";
 import type { Comic } from "#/lib/content";
@@ -12,7 +12,7 @@ export function ComicCard({ comic }: { comic: Comic }) {
 
 	return (
 		<Link to="/comics/$slug" params={{ slug: comic.slug }} className="group">
-			<Card interactive className="flex h-full flex-col p-0">
+			<Card className="flex h-full flex-col gap-0 p-0 transition-[transform,box-shadow] hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]">
 				<div className="flex items-end justify-center rounded-t-lg border-b border-border bg-comic-stage px-4 pt-6">
 					<img
 						src={panelImageUrl(cover)}
@@ -24,8 +24,8 @@ export function ComicCard({ comic }: { comic: Comic }) {
 				</div>
 				<div className="flex flex-1 flex-col gap-2 p-5">
 					{format && (
-						<Badge variant="muted" className="self-start">
-							<format.icon className="size-3.5" strokeWidth={2} />
+						<Badge variant="secondary" className="self-start">
+							<format.icon className="size-3.5" />
 							{format.name}
 						</Badge>
 					)}

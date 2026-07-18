@@ -33,6 +33,9 @@
 	--bubble: #ffffff;
 	--bubble-ink: #1b1a17;
 
+	/* Destructive — errors only (never the rust accent). */
+	--destructive: #b91c1c;
+
 	/* Effects */
 	--ring: var(--rust);
 	--shadow-sm: 0 1px 2px rgba(27, 26, 23, 0.06);
@@ -59,6 +62,8 @@
 	--comic-stage: #211e17;
 	--bubble: #f5efe1;
 	--bubble-ink: #1b1a17;
+
+	--destructive: #f87171;
 
 	--ring: var(--rust);
 	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);

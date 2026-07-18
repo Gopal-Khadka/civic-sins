@@ -1,13 +1,13 @@
-import type { LucideIcon } from "lucide-react";
+import type { Icon } from "@phosphor-icons/react";
 import {
 	Gavel,
-	HeartHandshake,
+	Handshake,
+	Lightning,
 	Megaphone,
-	Scale,
-	Sparkles,
+	Scales,
+	Sparkle,
 	Waves,
-	Zap,
-} from "lucide-react";
+} from "@phosphor-icons/react";
 import { FORMATS_META, type FormatMeta } from "#/config/formats";
 
 /**
@@ -20,22 +20,22 @@ import { FORMATS_META, type FormatMeta } from "#/config/formats";
 /* ------------------------------------------------------------------ formats */
 
 export interface ComicFormat extends FormatMeta {
-	icon: LucideIcon;
+	icon: Icon;
 }
 
-/** Lucide icon per format, keyed by id. */
-const FORMAT_ICONS: Record<string, LucideIcon> = {
+/** Phosphor icon per format, keyed by id. */
+const FORMAT_ICONS: Record<string, Icon> = {
 	"the-ripple": Waves,
 	"civic-sense-court": Gavel,
-	"expectation-vs-reality": Scale,
+	"expectation-vs-reality": Scales,
 	"the-smug-narrator": Megaphone,
-	"todays-confession": HeartHandshake,
-	"cosmic-karma": Zap,
+	"todays-confession": Handshake,
+	"cosmic-karma": Lightning,
 };
 
 export const FORMATS: ComicFormat[] = FORMATS_META.map((f) => ({
 	...f,
-	icon: FORMAT_ICONS[f.id] ?? Sparkles,
+	icon: FORMAT_ICONS[f.id] ?? Sparkle,
 }));
 
 export const FORMAT_IDS = FORMATS.map((f) => f.id);

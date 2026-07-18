@@ -1,9 +1,9 @@
+import { ArrowRight } from "@phosphor-icons/react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
 import { ComicCard } from "#/components/comic/ComicCard";
-import { buttonVariants } from "#/components/ui/Button";
-import { Card } from "#/components/ui/Card";
+import { buttonVariants } from "#/components/ui/button";
 import { Container } from "#/components/ui/Container";
+import { Card } from "#/components/ui/card";
 import { FORMATS } from "#/config/comics";
 import { siteConfig } from "#/config/site";
 import { getFeaturedComics } from "#/lib/content";
@@ -79,11 +79,11 @@ function Home() {
 				</h2>
 				<div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 					{FORMATS.map((format) => (
-						<Card key={format.id} className="flex gap-4">
-							<format.icon
-								className="size-6 shrink-0 text-rust"
-								strokeWidth={1.75}
-							/>
+						<Card
+							key={format.id}
+							className="flex flex-row items-start gap-4 p-6"
+						>
+							<format.icon className="size-6 shrink-0 text-rust" />
 							<div>
 								<h3 className="font-serif text-lg font-medium text-ink">
 									{format.name}

@@ -1,4 +1,4 @@
-import { Monitor, Moon, Sun } from "lucide-react";
+import { Monitor, Moon, Sun } from "@phosphor-icons/react";
 import type { Theme } from "#/config/theme";
 import { themeConfig } from "#/config/theme";
 import { cn } from "#/lib/utils";
@@ -40,7 +40,7 @@ export function ThemeToggle({ className }: { className?: string }) {
 				className,
 			)}
 		>
-			<Icon className="size-[18px]" strokeWidth={1.75} />
+			<Icon className="size-[18px]" />
 		</button>
 	);
 }

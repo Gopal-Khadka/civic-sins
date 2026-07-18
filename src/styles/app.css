@@ -30,6 +30,25 @@
   --color-bubble: var(--bubble);
   --color-bubble-ink: var(--bubble-ink);
 
+  /* shadcn/Base UI semantic tokens -> comic palette. Lets components added via
+   * `shadcn add` render in our paper/ink/rust identity without editing them. */
+  --color-background: var(--page);
+  --color-foreground: var(--ink);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--rust);
+  --color-primary-foreground: var(--on-accent);
+  --color-secondary: var(--surface-2);
+  --color-secondary-foreground: var(--ink);
+  --color-muted-foreground: var(--ink-soft);
+  --color-accent: var(--muted);
+  --color-accent-foreground: var(--ink);
+  --color-destructive: var(--destructive);
+  --color-input: var(--border);
+  --color-ring: var(--rust);
+
   --font-sans: var(--font-body);
   --font-serif: var(--font-display);
 }
@@ -40,6 +59,9 @@
   --radius-md: 4px;
   --radius-lg: 8px;
   --radius-xl: 14px;
+  --radius-2xl: 20px;
+  --radius-3xl: 28px;
+  --radius-4xl: 9999px;
 }
 
 @layer base {

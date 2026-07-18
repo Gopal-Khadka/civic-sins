@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { buttonVariants } from "#/components/ui/Button";
+import { buttonVariants } from "#/components/ui/button";
 import { Container } from "#/components/ui/Container";
 
 /**

@@ -35,7 +35,7 @@ export function Footer() {
 								rel="noreferrer"
 								className="inline-flex size-9 items-center justify-center rounded-md border border-border text-ink-soft transition-colors hover:border-rust/40 hover:text-rust"
 							>
-								<Icon className="size-[18px]" strokeWidth={1.75} />
+								<Icon className="size-[18px]" />
 							</a>
 						);
 					})}

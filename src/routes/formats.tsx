@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageWrap } from "#/components/layout/PageWrap";
 import { MDXContent } from "#/components/mdx/MDXContent";
-import { Card } from "#/components/ui/Card";
+import { Card } from "#/components/ui/card";
 import { FORMATS } from "#/config/comics";
 import { getPage } from "#/lib/content";
 import { seo } from "#/lib/seo";
@@ -30,10 +30,10 @@ function FormatsPage() {
 
 			<div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
 				{FORMATS.map((format) => (
-					<Card key={format.id} className="flex flex-col gap-3">
+					<Card key={format.id} className="flex flex-col gap-3 p-6">
 						<div className="flex items-center gap-3">
 							<span className="inline-flex size-10 items-center justify-center rounded-md bg-muted text-rust">
-								<format.icon className="size-5" strokeWidth={1.75} />
+								<format.icon className="size-5" />
 							</span>
 							<h2 className="font-serif text-xl font-medium text-ink">
 								{format.name}
