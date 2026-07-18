@@ -1,13 +1,5 @@
 import type { Icon } from "@phosphor-icons/react";
-import {
-	BookOpen,
-	GithubLogo,
-	InstagramLogo,
-	PaperPlaneTilt,
-	Scroll,
-	Sparkle,
-	StackSimple,
-} from "@phosphor-icons/react";
+import { GithubLogo, InstagramLogo, SealWarning } from "@phosphor-icons/react";
 import { DEFAULT_SITE_URL, seoConfig, socialLinks } from "#/config/seo";
 
 /**
@@ -21,7 +13,6 @@ import { DEFAULT_SITE_URL, seoConfig, socialLinks } from "#/config/seo";
 export interface NavItem {
 	label: string;
 	to: string;
-	icon: Icon;
 }
 
 export interface SocialLink {
@@ -42,22 +33,22 @@ export const siteConfig = {
 	tagline: seoConfig.tagline,
 	description: seoConfig.description,
 	url: DEFAULT_SITE_URL,
-	brandIcon: Sparkle as Icon,
+	brandIcon: SealWarning as Icon,
 
 	nav: [
-		{ label: "Comics", to: "/comics", icon: BookOpen },
-		{ label: "Formats", to: "/formats", icon: StackSimple },
-		{ label: "Principles", to: "/principles", icon: Scroll },
+		{ label: "Comics", to: "/comics" },
+		{ label: "Formats", to: "/formats" },
+		{ label: "Principles", to: "/principles" },
 	] satisfies NavItem[],
 
-	cta: { label: "Read the comics", to: "/comics", icon: PaperPlaneTilt },
+	cta: { label: "Read comics", to: "/comics" },
 
 	social: socialLinks.map((s) => ({
 		...s,
-		icon: socialIcons[s.label] ?? Sparkle,
+		icon: socialIcons[s.label] ?? SealWarning,
 	})) satisfies SocialLink[],
 
 	footer: {
-		note: "A social-responsibility hobby project. Not political. Not for profit. Targets behaviours, never people.",
+		note: "A not-for-profit hobby project. Never political. Aimed at habits, never people.",
 	},
 } as const;

@@ -1,33 +1,33 @@
 /* ===========================================================================
- * Typography tokens — fonts + type scale (design.md "Heritage").
- * Display/headings: Fraunces. Body: Public Sans. Labels: Space Grotesk.
+ * Typography tokens — fonts + type scale (design.md "Notice").
+ * Display/headings: Public Sans, weight 800 (poster-heavy). Body: Public Sans.
+ * Labels/stamps: Space Grotesk, uppercase, wide tracking.
  * Self-hosted variable fonts (no network FOUC).
- * Mapped into Tailwind (font-serif / font-sans / font-mono) by app.css.
+ * Mapped into Tailwind (font-sans / font-mono) by app.css.
  * ======================================================================== */
 
-@import "@fontsource-variable/fraunces";
 @import "@fontsource-variable/public-sans";
 @import "@fontsource-variable/space-grotesk";
 
 :root {
-	--font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
 	--font-body: "Public Sans Variable", ui-sans-serif, system-ui, sans-serif;
+	--font-display: "Public Sans Variable", ui-sans-serif, system-ui, sans-serif;
 	--font-label: "Space Grotesk Variable", ui-monospace, monospace;
 
 	/* Type scale (size / weight / leading / tracking) */
 	--text-display-size: clamp(2.5rem, 6vw, 4rem);
-	--text-display-weight: 500;
+	--text-display-weight: 800;
 	--text-display-tracking: -0.02em;
-	--text-display-leading: 1.05;
+	--text-display-leading: 1.02;
 
 	--text-h1-size: clamp(2rem, 4vw, 2.5rem);
-	--text-h1-weight: 500;
+	--text-h1-weight: 800;
 
 	--text-body-size: 1rem;
 	--text-body-leading: 1.6;
 
 	--text-label-size: 0.75rem;
-	--text-label-tracking: 0.08em;
+	--text-label-tracking: 0.1em;
 }
 
 /* Reusable typographic helpers (used across pages — DRY). */
@@ -39,11 +39,22 @@
 	line-height: var(--text-display-leading);
 }
 
+/* Stamped municipal label — kickers, section eyebrows. */
 .kicker {
+	display: inline-block;
 	font-family: var(--font-label);
 	font-size: var(--text-label-size);
 	letter-spacing: var(--text-label-tracking);
 	text-transform: uppercase;
 	font-weight: 600;
-	color: var(--muted-foreground);
+	color: var(--primary);
+}
+
+/* Stamp — a bordered, boxed variant of the label for filters and format tags. */
+.stamp {
+	font-family: var(--font-label);
+	font-size: var(--text-label-size);
+	letter-spacing: var(--text-label-tracking);
+	text-transform: uppercase;
+	font-weight: 600;
 }

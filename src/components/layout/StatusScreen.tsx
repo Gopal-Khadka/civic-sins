@@ -18,7 +18,7 @@ export function StatusScreen({
 	return (
 		<Container as="section" className="py-24 text-center sm:py-32">
 			<p className="kicker mb-4 text-primary">{code}</p>
-			<h1 className="font-serif text-4xl font-medium text-foreground sm:text-5xl">
+			<h1 className="text-4xl font-extrabold text-foreground sm:text-5xl">
 				{title}
 			</h1>
 			<p className="mx-auto mt-4 max-w-md text-muted-foreground">

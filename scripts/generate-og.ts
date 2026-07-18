@@ -19,20 +19,22 @@ const comicsDir = join(root, "src/content/comics");
 const fontsDir = join(root, "assets/fonts");
 const outDir = join(root, "public/og");
 
-// Brand tokens (light "Paper White" palette — mirrors src/styles/tokens.css).
+// Brand tokens ("Notice" palette — mirrors src/styles/tokens.css).
 const COLOR = {
-	ink: "#1b1a17",
-	inkSoft: "#5c5a54",
-	rust: "#9c3b1b",
-	page: "#f5efe1",
-	surface: "#faf5e8",
-	border: "#ddd2bb",
+	ink: "#1a1917",
+	inkSoft: "#6b6558",
+	accent: "#e23a1e",
+	page: "#f4f1e8",
+	surface: "#ffffff",
+	border: "#1a1917",
 };
 
+// Sans-only, poster-heavy. Source Sans 3 stands in for Public Sans in the
+// build-time card (satori needs a static TTF; the site self-hosts the variable).
 const fonts = [
 	{
-		name: "Source Serif 4",
-		data: readFileSync(join(fontsDir, "SourceSerif4-Bold.ttf")),
+		name: "Source Sans 3",
+		data: readFileSync(join(fontsDir, "SourceSans3-Semibold.ttf")),
 		weight: 700 as const,
 		style: "normal" as const,
 	},
@@ -73,7 +75,7 @@ function card(opts: { title: string; footer: string }): Node {
 			backgroundColor: COLOR.page,
 			padding: "72px 80px",
 			position: "relative",
-			border: `1px solid ${COLOR.border}`,
+			border: `3px solid ${COLOR.border}`,
 		},
 		[
 			// brand accent bar
@@ -81,9 +83,9 @@ function card(opts: { title: string; footer: string }): Node {
 				position: "absolute",
 				left: 0,
 				top: 0,
-				width: 16,
+				width: 20,
 				height: 630,
-				backgroundColor: COLOR.rust,
+				backgroundColor: COLOR.accent,
 			}),
 			// kicker
 			el(
@@ -93,7 +95,7 @@ function card(opts: { title: string; footer: string }): Node {
 					fontWeight: 600,
 					fontSize: 30,
 					letterSpacing: 8,
-					color: COLOR.rust,
+					color: COLOR.accent,
 				},
 				seoConfig.name.toUpperCase(),
 			),
@@ -102,10 +104,11 @@ function card(opts: { title: string; footer: string }): Node {
 				"div",
 				{
 					display: "flex",
-					fontFamily: "Source Serif 4",
+					fontFamily: "Source Sans 3",
 					fontWeight: 700,
 					fontSize: titleSize(opts.title),
-					lineHeight: 1.05,
+					lineHeight: 1.03,
+					letterSpacing: -1,
 					color: COLOR.ink,
 					maxWidth: 1000,
 				},
@@ -127,7 +130,7 @@ function card(opts: { title: string; footer: string }): Node {
 							fontFamily: "Source Sans 3",
 							fontWeight: 600,
 							fontSize: 26,
-							color: COLOR.rust,
+							color: COLOR.accent,
 						},
 						opts.footer,
 					),

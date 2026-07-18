@@ -12,7 +12,8 @@ interface ComicsSearch {
 }
 
 const GALLERY_TITLE = "Every sin, on the record";
-const GALLERY_DESC = "Find yourself in one. Then send it to someone else.";
+const GALLERY_DESC =
+	"Find yourself in one. Then send it to someone who needs it.";
 
 export const Route = createFileRoute("/comics/")({
 	validateSearch: (search: Record<string, unknown>): ComicsSearch => ({
@@ -56,10 +57,10 @@ function FilterChip({
 			to="/comics"
 			search={search}
 			className={cn(
-				"rounded-md border px-3 py-1.5 text-sm transition-colors",
+				"stamp border-2 border-foreground px-3 py-1.5 transition-colors",
 				active
-					? "border-primary bg-primary text-primary-foreground"
-					: "border-border text-muted-foreground hover:border-primary/40 hover:text-primary",
+					? "bg-primary text-primary-foreground"
+					: "text-foreground hover:bg-foreground hover:text-background",
 			)}
 		>
 			{label}
@@ -77,22 +78,9 @@ function ComicsPage() {
 			title={GALLERY_TITLE}
 			description={GALLERY_DESC}
 		>
-			{/* Format filters */}
-			<div className="mb-3 flex flex-wrap gap-2">
-				<FilterChip label="All formats" active={!format} search={{ tag }} />
-				{FORMATS.map((f) => (
-					<FilterChip
-						key={f.id}
-						label={f.name}
-						active={format === f.id}
-						search={{ format: f.id, tag }}
-					/>
-				))}
-			</div>
-
-			{/* Tag filters */}
-			<div className="mb-10 flex flex-wrap gap-2">
-				<FilterChip label="All topics" active={!tag} search={{ format }} />
+			{/* Offence filters — the primary axis */}
+			<div className="mb-4 flex flex-wrap gap-2">
+				<FilterChip label="All" active={!tag} search={{ format }} />
 				{TAGS.map((t) => (
 					<FilterChip
 						key={t.id}
@@ -103,9 +91,27 @@ function ComicsPage() {
 				))}
 			</div>
 
+			{/* Format filters — secondary, tucked into a collapsible row */}
+			<details className="mb-10 border-b-[3px] border-foreground pb-4">
+				<summary className="stamp cursor-pointer select-none text-muted-foreground">
+					Filter by format {format ? "(1)" : ""}
+				</summary>
+				<div className="mt-3 flex flex-wrap gap-2">
+					<FilterChip label="Any format" active={!format} search={{ tag }} />
+					{FORMATS.map((f) => (
+						<FilterChip
+							key={f.id}
+							label={f.stamp}
+							active={format === f.id}
+							search={{ format: f.id, tag }}
+						/>
+					))}
+				</div>
+			</details>
+
 			{comics.length === 0 ? (
-				<p className="text-muted-foreground">
-					No comics match that filter yet.
+				<p className="border-[3px] border-dashed border-foreground p-8 text-center text-lg font-bold text-muted-foreground">
+					No public offences found. Suspiciously well-behaved.
 				</p>
 			) : (
 				<div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">

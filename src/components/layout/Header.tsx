@@ -7,11 +7,11 @@ import { cn } from "#/lib/utils";
 export function Header() {
 	const BrandIcon = siteConfig.brandIcon;
 	return (
-		<header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
+		<header className="sticky top-0 z-40 border-b-[3px] border-foreground bg-background/90 backdrop-blur">
 			<Container className="flex h-16 items-center justify-between gap-4">
 				<Link to="/" className="flex items-center gap-2 text-foreground">
-					<BrandIcon className="size-5 text-primary" />
-					<span className="font-serif text-lg font-medium">
+					<BrandIcon weight="fill" className="size-6 text-primary" />
+					<span className="text-lg font-extrabold tracking-tight">
 						{siteConfig.name}
 					</span>
 				</Link>

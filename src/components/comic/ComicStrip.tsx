@@ -1,4 +1,3 @@
-import { Badge } from "#/components/ui/badge";
 import { getFormat, getTag } from "#/config/comics";
 import type { Comic } from "#/lib/content";
 import { cn } from "#/lib/utils";
@@ -18,24 +17,26 @@ export function ComicStrip({ comic }: { comic: Comic }) {
 	return (
 		<article>
 			<header className="mb-6">
-				<div className="mb-3 flex flex-wrap items-center gap-2">
+				<div className="mb-4 flex flex-wrap items-center gap-2">
 					{format && (
-						<Badge variant="default">
-							<format.icon className="size-3.5" />
-							{format.name}
-						</Badge>
+						<span className="stamp border-2 border-foreground bg-foreground px-2 py-0.5 text-[0.7rem] text-background">
+							{format.stamp}
+						</span>
 					)}
 					{comic.tags.map((tag) => (
-						<Badge key={tag} variant="outline">
+						<span
+							key={tag}
+							className="stamp border-2 border-foreground px-2 py-0.5 text-[0.7rem] text-foreground"
+						>
 							{getTag(tag)?.label ?? tag}
-						</Badge>
+						</span>
 					))}
 				</div>
-				<h2 className="font-serif text-3xl font-medium text-foreground">
+				<h2 className="text-3xl font-extrabold leading-tight text-foreground sm:text-4xl">
 					{comic.title}
 				</h2>
 				{comic.summary && (
-					<p className="mt-2 max-w-2xl text-muted-foreground">
+					<p className="mt-3 max-w-2xl text-lg text-muted-foreground">
 						{comic.summary}
 					</p>
 				)}
@@ -48,7 +49,6 @@ export function ComicStrip({ comic }: { comic: Comic }) {
 					<ComicPanel
 						key={`${panel.character}-${panel.emotion}-${panel.pose}-${panel.dialogue ?? panel.caption ?? i}`}
 						panel={panel}
-						index={i}
 					/>
 				))}
 			</div>

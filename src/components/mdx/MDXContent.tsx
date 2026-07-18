@@ -13,7 +13,7 @@ const mdxComponents = {
 };
 
 const proseClasses =
-	"prose max-w-none prose-headings:font-serif prose-headings:font-medium prose-headings:text-foreground " +
+	"prose max-w-none prose-headings:font-extrabold prose-headings:tracking-tight prose-headings:text-foreground " +
 	"prose-p:text-foreground prose-li:text-foreground prose-strong:text-foreground prose-strong:font-semibold " +
 	"prose-a:text-primary prose-blockquote:border-primary prose-blockquote:text-muted-foreground " +
 	"prose-code:text-foreground prose-hr:border-border marker:text-primary";

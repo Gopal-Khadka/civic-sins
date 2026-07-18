@@ -1,42 +1,17 @@
-import type { Icon } from "@phosphor-icons/react";
-import {
-	Gavel,
-	Handshake,
-	Lightning,
-	Megaphone,
-	Scales,
-	Sparkle,
-	Waves,
-} from "@phosphor-icons/react";
 import { FORMATS_META, type FormatMeta } from "#/config/formats";
 
 /**
  * Comic catalog config — the single source of truth for the character cast
  * (mapped to Comicgen) and the tag vocabulary. Format metadata lives in the
- * framework-free `formats.ts`; here we attach the Lucide icons.
+ * framework-free `formats.ts`; formats are stamped by name, not iconified.
  * Schemas, gallery filters and the Formats page all derive from this.
  */
 
 /* ------------------------------------------------------------------ formats */
 
-export interface ComicFormat extends FormatMeta {
-	icon: Icon;
-}
+export type ComicFormat = FormatMeta;
 
-/** Phosphor icon per format, keyed by id. */
-const FORMAT_ICONS: Record<string, Icon> = {
-	"the-ripple": Waves,
-	"civic-sense-court": Gavel,
-	"expectation-vs-reality": Scales,
-	"the-smug-narrator": Megaphone,
-	"todays-confession": Handshake,
-	"cosmic-karma": Lightning,
-};
-
-export const FORMATS: ComicFormat[] = FORMATS_META.map((f) => ({
-	...f,
-	icon: FORMAT_ICONS[f.id] ?? Sparkle,
-}));
+export const FORMATS: ComicFormat[] = FORMATS_META;
 
 export const FORMAT_IDS = FORMATS.map((f) => f.id);
 export const getFormat = (id: string) => FORMATS.find((f) => f.id === id);

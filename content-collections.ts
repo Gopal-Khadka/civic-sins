@@ -16,6 +16,8 @@ const panelSchema = z.object({
   dialogue: z.string().optional(),
   caption: z.string().optional(),
   narration: z.string().optional(),
+  /** Civic setting used to tint the panel background (bus, road, queue, …). */
+  scene: z.string().optional(),
   flip: z.boolean().optional(),
 })
 
@@ -24,6 +26,7 @@ const comics = defineCollection({
   directory: 'src/content/comics',
   include: '*.mdx',
   schema: z.object({
+    content: z.string(),
     id: z.string(),
     title: z.string(),
     format: z.string(),
@@ -46,6 +49,7 @@ const pages = defineCollection({
   directory: 'src/content/pages',
   include: '*.mdx',
   schema: z.object({
+    content: z.string(),
     title: z.string(),
     description: z.string().optional(),
     order: z.number().default(0),
@@ -57,4 +61,4 @@ const pages = defineCollection({
   },
 })
 
-export default defineConfig({ collections: [comics, pages] })
+export default defineConfig({ content: [comics, pages] })

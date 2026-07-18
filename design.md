@@ -1,24 +1,27 @@
 ---
 version: alpha
-name: Heritage
-description: Architectural minimalism meets journalistic gravitas.
+name: Notice
+description: Municipal noticeboard meets comic strip. A public warning poster with jokes.
 colors:
-  primary: "#1A1C1E"
-  secondary: "#6C7278"
-  tertiary: "#B8422E"
-  neutral: "#F7F5F2"
+  primary: "#1A1917"
+  secondary: "#6B6558"
+  tertiary: "#E23A1E"
+  neutral: "#F4F1E8"
   surface: "#FFFFFF"
   on-primary: "#FFFFFF"
+  scene-blue: "#2F6E8F"
+  scene-yellow: "#E0A92E"
+  scene-green: "#4E8A5B"
 typography:
   display:
-    fontFamily: Fraunces
+    fontFamily: Public Sans
     fontSize: 4rem
-    fontWeight: 500
+    fontWeight: 800
     letterSpacing: "-0.02em"
   h1:
-    fontFamily: Fraunces
+    fontFamily: Public Sans
     fontSize: 2.5rem
-    fontWeight: 500
+    fontWeight: 800
   body:
     fontFamily: Public Sans
     fontSize: 1rem
@@ -26,11 +29,11 @@ typography:
   label:
     fontFamily: Space Grotesk
     fontSize: 0.75rem
-    letterSpacing: "0.08em"
+    letterSpacing: "0.1em"
 rounded:
-  sm: 2px
-  md: 4px
-  lg: 8px
+  panel: 0px
+  chip: 6px
+  card: 6px
 spacing:
   sm: 8px
   md: 16px
@@ -39,37 +42,53 @@ components:
   button-primary:
     backgroundColor: "{colors.tertiary}"
     textColor: "{colors.on-primary}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.chip}"
     padding: 12px 20px
-  card:
+  panel:
     backgroundColor: "{colors.surface}"
-    textColor: "{colors.primary}"
-    rounded: "{rounded.lg}"
-    padding: 24px
+    border: "3px solid {colors.primary}"
+    rounded: "{rounded.panel}"
 ---
 ## Overview
 
-A warm, high-contrast palette rooted in broadsheet newspapers and matte galleries. Deep ink on warm limestone, one single accent for action.
+Civic Sins is comic satire about the small public habits everyone hates and
+sometimes commits. The visual language is a municipal noticeboard that someone
+drew jokes on: off-white paper, heavy ink, one civic red-orange, thick panel
+rules, and stamped labels. It should feel like a public warning poster, not a
+broadsheet essay. Loud where it needs to be, flat everywhere else.
 
 ## Colors
 
-The palette is built around high-contrast neutrals and a single accent that drives interaction.
-
-- **Primary (`#1A1C1E`):** Headlines and core text.
-- **Secondary (`#6C7278`):** Borders, captions, and metadata.
-- **Tertiary (`#B8422E`):** The sole driver for interaction. Reserve it.
-- **Neutral (`#F7F5F2`):** The page foundation.
+- **Ink (`#1A1917`):** Text, headlines, and the thick rules around comic panels.
+- **Paper (`#F4F1E8`):** The page. Warm off-white, like a printed notice.
+- **Red-orange (`#E23A1E`):** The one accent. Actions, punchlines, stamps, active
+  filters. Reserve it — one loud thing per screen.
+- **Ink-soft (`#6B6558`):** Captions, metadata, secondary text.
+- **Scene colors** (`#2F6E8F` blue, `#E0A92E` yellow, `#4E8A5B` green): used
+  **only inside comic panels** to tint a setting — a bus, a street, a queue.
+  Never as UI accents.
 
 ## Typography
 
-- **display:** Fraunces 4rem
-- **h1:** Fraunces 2.5rem
-- **body:** Public Sans 1rem
-- **label:** Space Grotesk 0.75rem
+- **display / h1:** Public Sans, weight 800. Heavy, tight, poster-like.
+- **body:** Public Sans, 1rem, line-height 1.6.
+- **label / stamp:** Space Grotesk, uppercase, wide tracking. Used for kickers,
+  format stamps, and filter chips.
+
+Fraunces is gone. This is not a heritage broadsheet.
+
+## Shape
+
+- **Comic panels:** square. 0px radius, 3px ink border. Flat.
+- **Buttons and chips:** 6px radius. Small, deliberate.
+- **Cards:** avoid the generic three-equal-card grid. Use cards only when they
+  represent a real comic object, and keep the radius tight.
 
 ## Do's and Don'ts
 
-- **Do** use Tertiary for exactly one action per screen.
-- **Do** let Neutral carry the composition — negative space is a feature.
-- **Don't** introduce gradients. This system is flat on purpose.
-- **Don't** mix Tertiary with alternate accents; the single-accent rule is load-bearing.
+- **Do** keep one red-orange action per screen.
+- **Do** give comic panels thick ink borders — they should read as strips, not UI.
+- **Do** use scene colors to place characters in a real civic setting.
+- **Don't** use Fraunces or any serif display face.
+- **Don't** reach for gradients, soft shadows, or rounded app-cards. Flat and hard.
+- **Don't** decorate nav or format cards with literal icons. Text and stamps carry it.

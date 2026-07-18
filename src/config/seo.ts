@@ -16,9 +16,9 @@ export const socialLinks = [
 export const seoConfig = {
 	name: "Civic Sins",
 	shortName: "Civic Sins",
-	tagline: "We are all guilty. Especially me.",
+	tagline: "You do this too.",
 	description:
-		"Satirical comics that teach civic sense by making you wince at yourself — not the stranger next to you.",
+		"Short comics about the small public habits everyone hates and sometimes commits.",
 	/** Open Graph locale. */
 	locale: "en_US",
 	/** ISO language for <html> / feeds. */

@@ -4,10 +4,10 @@ import { siteConfig } from "#/config/site";
 
 export function Footer() {
 	return (
-		<footer className="mt-20 border-t border-border bg-card">
+		<footer className="mt-20 border-t-[3px] border-foreground bg-card">
 			<Container className="flex flex-col gap-8 py-12 sm:flex-row sm:items-start sm:justify-between">
 				<div className="max-w-sm">
-					<p className="font-serif text-lg text-foreground">
+					<p className="text-lg font-extrabold tracking-tight text-foreground">
 						{siteConfig.name}
 					</p>
 					<p className="mt-2 text-sm text-muted-foreground">

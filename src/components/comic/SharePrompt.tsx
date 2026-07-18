@@ -30,8 +30,8 @@ export function SharePrompt({ comic }: { comic: Comic }) {
 	};
 
 	return (
-		<div className="mt-8 flex flex-col items-start gap-4 rounded-lg border border-border bg-card p-5 sm:flex-row sm:items-center sm:justify-between">
-			<p className="font-serif text-lg text-foreground">
+		<div className="mt-8 flex flex-col items-start gap-4 border-[3px] border-foreground bg-card p-5 sm:flex-row sm:items-center sm:justify-between">
+			<p className="text-lg font-bold text-foreground">
 				{comic.sharePrompt ?? "Know someone who does this?"}
 			</p>
 			<Button onClick={share} size="sm" className="shrink-0">

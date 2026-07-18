@@ -57,10 +57,12 @@ stop and surface it; the rule is wrong or the change is.
 ## UI rules
 
 - **Read `design.md` before building or changing UI.** It owns the visual direction:
-  the "Heritage" system — architectural minimalism meets journalistic gravitas. Deep
-  ink (`#1A1C1E`) on warm limestone (`#F7F5F2`), one terracotta accent (`#B8422E`)
-  reserved for a single action per screen. Fraunces (display), Public Sans (body),
-  Space Grotesk (labels). Flat, no gradients, negative space is a feature.
+  the "Notice" system — municipal noticeboard meets comic strip, a public warning
+  poster with jokes. Heavy ink (`#1A1917`) on off-white paper (`#F4F1E8`), one civic
+  red-orange accent (`#E23A1E`) for a single action per screen. Public Sans (weight
+  800 for display, regular for body), Space Grotesk (stamped labels). No serif — no
+  Fraunces. Flat and hard: thick ink rules, comic panels with 3px borders, tight
+  radius (6px chips, 0px panels), no gradients or soft shadows.
 - **Add UI components with the shadcn CLI, don't hand-roll them.** Run
   `pnpm dlx shadcn@latest add <component>` (registry `base-nova`, Base UI + Phosphor).
   Components land in `src/components/ui/` as lowercase files (`button.tsx`,
@@ -68,18 +70,22 @@ stop and surface it; the rule is wrong or the change is.
   equivalent (e.g. `Container.tsx`, the page-width wrapper).
 - **The palette lives in the tokens, not in each component.** shadcn components use
   the semantic token names (`bg-primary`, `bg-card`, `text-muted-foreground`, …);
-  `tokens.css` gives those the Heritage values and `app.css` maps them to Tailwind,
-  so added components render on-brand unmodified. `--primary` is the terracotta
-  accent, so a default `<Button>` is the reserved action. Need a token that isn't
-  defined yet? Add it in `tokens.css` (light + dark) — never hardcode a hex in a
-  component.
+  `tokens.css` gives those the Notice values and `app.css` maps them to Tailwind,
+  so added components render on-brand unmodified. `--primary` is the civic red-orange
+  accent, so a default `<Button>` is the reserved action. The `--chart-*` tokens
+  double as the comic scene palette (blue/yellow/green) and are used only inside
+  panels, never as UI accents. Need a token that isn't defined yet? Add it in
+  `tokens.css` (light + dark) — never hardcode a hex in a component.
 - **Icons: Phosphor, imported from `@phosphor-icons/react`.** Type icon props/props
   maps with the exported `Icon` type. Size with a `className` (`size-4`), not the
   `size` prop; adjust stroke look with Phosphor's `weight` prop — there is no
   `strokeWidth`. Never reintroduce lucide.
 - **No raw hex in UI.** Add or reuse a token in `styles/`, then consume it.
-- **One accent action per screen** (terracotta `--primary`). Everything else is
-  `outline` / `ghost` / ink text.
+- **One accent action per screen** (red-orange `--primary`). Everything else is
+  `outline` / `ghost` / ink text or an ink-bordered stamp.
+- **Formats are stamped, not iconified.** Each format has a short uppercase `stamp`
+  (RIPPLE, COURT, …) in `formats.ts`; render it as a bordered `.stamp` label, not a
+  Phosphor icon. Nav has no icons either — text carries it.
 - **File naming**: shadcn `ui/` components are lowercase (`button.tsx`, `card.tsx`);
   feature components are PascalCase (`ComicCard.tsx`, `Container.tsx`).
 

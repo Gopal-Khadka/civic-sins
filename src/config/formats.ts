@@ -1,12 +1,15 @@
 /**
  * Framework-free comic format metadata. The single source of truth for the
- * recurring formats, shared by `comics.ts` (which attaches Lucide icons) and the
- * build-time OG image generator (which can't import React/icons).
+ * recurring formats, shared by `comics.ts` and the build-time OG image
+ * generator (which can't import React/icons). Formats are identified by a
+ * typographic stamp, not an icon — see design.md "Notice".
  */
 
 export interface FormatMeta {
 	id: string;
 	name: string;
+	/** Short uppercase code used as a stamp label (RIPPLE, COURT, …). */
+	stamp: string;
 	mechanic: string;
 	sting: string;
 }
@@ -15,41 +18,45 @@ export const FORMATS_META: FormatMeta[] = [
 	{
 		id: "the-ripple",
 		name: "The Ripple",
+		stamp: "RIPPLE",
 		mechanic:
-			"One small inconsiderate act cascades into ruining ten people’s day.",
-		sting: "Makes the invisible cost of “just one wrapper” visible.",
+			"One careless act rolls downhill until it wrecks ten other people's day.",
+		sting: "You see the full cost of one small shortcut.",
 	},
 	{
 		id: "civic-sense-court",
 		name: "Civic Sense Court",
-		mechanic: "An offender on trial gives an absurdly self-righteous defense.",
-		sting: "Reusable cast; comedy rides the emotion swings.",
+		stamp: "COURT",
+		mechanic: "An offender takes the stand and defends the indefensible.",
+		sting: "The excuse convicts them better than any verdict.",
 	},
 	{
 		id: "expectation-vs-reality",
 		name: "Expectation vs Reality",
-		mechanic:
-			"What the offender thinks they look like vs what they actually look like.",
-		sting: "Brutal, instant, infinitely repeatable.",
+		stamp: "VS",
+		mechanic: "What the offender pictures versus what everyone else sees.",
+		sting: "The gap does the whole joke.",
 	},
 	{
 		id: "the-smug-narrator",
 		name: "The Smug Narrator",
-		mechanic:
-			"A character lectures everyone and is secretly the worst offender present.",
-		sting: "Dramatic irony — the reader sees what the character can’t.",
+		stamp: "NARRATOR",
+		mechanic: "Someone loudly judges a habit, then does it two panels later.",
+		sting: "You catch the hypocrisy before they do.",
 	},
 	{
 		id: "todays-confession",
 		name: "Today's Confession",
-		mechanic: "The mascot owns one of their own civic sins.",
-		sting: "Builds trust; models the self-aware-hypocrite tone.",
+		stamp: "CONFESSION",
+		mechanic: "Dey owns up to one of his own civic sins, on the record.",
+		sting: "A joke that starts with us is harder to shrug off.",
 	},
 	{
 		id: "cosmic-karma",
 		name: "Cosmic Karma",
-		mechanic: "The serial offender faces escalating, exaggerated comeuppance.",
-		sting: "Memorable through absurd escalation.",
+		stamp: "KARMA",
+		mechanic: "A repeat offender meets a wildly oversized payback.",
+		sting: "Absurd punishment, entirely deserved.",
 	},
 ];
 

@@ -34,12 +34,12 @@ export const Route = createRootRoute({
 			// Browser chrome color, per scheme (matches the Paper White tokens).
 			{
 				name: "theme-color",
-				content: "#f5efe1",
+				content: "#f4f1e8",
 				media: "(prefers-color-scheme: light)",
 			},
 			{
 				name: "theme-color",
-				content: "#16140f",
+				content: "#171613",
 				media: "(prefers-color-scheme: dark)",
 			},
 		],
@@ -50,7 +50,7 @@ export const Route = createRootRoute({
 			{
 				rel: "alternate",
 				type: "application/rss+xml",
-				title: `${seoConfig.name} — comics`,
+				title: `${seoConfig.name}: comics`,
 				href: "/rss.xml",
 			},
 		],
@@ -70,7 +70,7 @@ export const Route = createRootRoute({
 		<StatusScreen
 			code="500"
 			title="We sinned, technically"
-			description="Something broke on our end. We're owning it — try again in a moment."
+			description="Something broke on our end. We own it. Try again in a moment."
 		/>
 	),
 	shellComponent: RootDocument,

@@ -60,8 +60,8 @@ function ComicDetail() {
 			<ComicStrip comic={comic} />
 
 			{comic.body && (
-				<section className="mt-12 border-t border-border pt-8">
-					<p className="kicker mb-4">Behind the strip</p>
+				<section className="mt-12 border-t-[3px] border-foreground pt-8">
+					<p className="kicker mb-4">Why it works</p>
 					<MDXContent code={comic.body} />
 				</section>
 			)}

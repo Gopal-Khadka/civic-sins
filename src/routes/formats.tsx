@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageWrap } from "#/components/layout/PageWrap";
 import { MDXContent } from "#/components/mdx/MDXContent";
-import { Card } from "#/components/ui/card";
 import { FORMATS } from "#/config/comics";
 import { getPage } from "#/lib/content";
 import { seo } from "#/lib/seo";
@@ -28,25 +27,31 @@ function FormatsPage() {
 		>
 			{page?.body && <MDXContent code={page.body} className="mb-12" />}
 
-			<div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-				{FORMATS.map((format) => (
-					<Card key={format.id} className="flex flex-col gap-3 p-6">
-						<div className="flex items-center gap-3">
-							<span className="inline-flex size-10 items-center justify-center rounded-md bg-muted text-primary">
-								<format.icon className="size-5" />
+			{/* Writer's room board — one row per format */}
+			<div className="border-[3px] border-foreground">
+				{FORMATS.map((format, i) => (
+					<div
+						key={format.id}
+						className={`grid gap-4 p-6 sm:grid-cols-[8rem_1fr] ${
+							i > 0 ? "border-t-[3px] border-foreground" : ""
+						}`}
+					>
+						<div>
+							<span className="stamp inline-block bg-foreground px-2 py-0.5 text-[0.7rem] text-background">
+								{format.stamp}
 							</span>
-							<h2 className="font-serif text-xl font-medium text-foreground">
+							<h2 className="mt-3 text-lg font-extrabold leading-tight text-foreground">
 								{format.name}
 							</h2>
 						</div>
-						<p className="text-foreground">{format.mechanic}</p>
-						<p className="text-sm text-muted-foreground">
-							<span className="font-semibold text-foreground">
-								Why it stings:
-							</span>{" "}
-							{format.sting}
-						</p>
-					</Card>
+						<div>
+							<p className="text-foreground">{format.mechanic}</p>
+							<p className="mt-2 text-sm text-muted-foreground">
+								<span className="stamp text-primary">Why it stings</span>{" "}
+								{format.sting}
+							</p>
+						</div>
+					</div>
 				))}
 			</div>
 		</PageWrap>
