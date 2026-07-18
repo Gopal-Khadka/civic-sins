@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/Gopal-Khadka/civic-sins/compare/v1.2.0...v1.2.1) (2026-07-18)
+
+
+### Bug Fixes
+
+* handle the issue of the og images ([7475053](https://github.com/Gopal-Khadka/civic-sins/commit/74750535c980c7e687b8bd30331e83645b62bc7a))
+
 ## [1.2.0](https://github.com/Gopal-Khadka/civic-sins/compare/v1.1.0...v1.2.0) (2026-07-18)
 
 
